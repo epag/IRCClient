@@ -24,3 +24,6 @@
  2 files changed, 3 insertions(+), 1 deletion(-)
 [master 85266d8] Make IRCclient
  1 file changed, 2 insertions(+)
+[master 42ad961] Make IRCclient
+ 3 files changed, 4 insertions(+), 2 deletions(-)
+ create mode 100755 IRCClient

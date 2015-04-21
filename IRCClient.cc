@@ -127,8 +127,11 @@ int main( int   argc,
     messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
-    // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
+    //Add list of Users.
+    gtk_table_attach_defaults (GTK_TABLE (table), NULL, 1, 2, 0, 2);
+
+    // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
     myMessage = create_text ("I am fine, thanks and you?\n");
     gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
     gtk_widget_show (myMessage);
