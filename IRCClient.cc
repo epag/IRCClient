@@ -19,7 +19,7 @@ void update_list_rooms() {
 }
 
 void send_clicked (GtkWidget *widget, gpointer data) {
-    g_print("send\n");
+
 } 
 
 void join_clicked (GtkWidget *widget, gpointer data) {
@@ -28,9 +28,7 @@ void join_clicked (GtkWidget *widget, gpointer data) {
 void create_clicked (GtkWidget *widget, gpointer data) {
     g_print("create\n");
 }
-void log_clicked (GtkWidget *widget, gpointer data) {
-    g_print("logged on\n");
-}
+
 
 /* Create the list of "messages" */
 static GtkWidget *create_list( const char * titleColumn, GtkListStore *model )
@@ -102,6 +100,80 @@ static GtkWidget *create_text( const char * initialText )
    gtk_widget_show_all (scrolled_window);
 
    return scrolled_window;
+}
+void log_clicked (GtkWidget *widget, gpointer data) {
+    g_print("logged on\n");
+    g_print("send\n");
+    GtkWidget *window;
+    GtkWidget *list;
+    GtkWidget *messages;
+    GtkWidget *myMessage;
+    GtkWidget *users;
+
+   
+    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title (GTK_WINDOW (window), "Paned Windows");
+    g_signal_connect (window, "destroy",
+	              G_CALLBACK (gtk_main_quit), NULL);
+    gtk_container_set_border_width (GTK_CONTAINER (window), 10);
+    gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
+
+    // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
+    GtkWidget *table = gtk_table_new (7, 4, TRUE);
+    gtk_container_add (GTK_CONTAINER (window), table);
+    gtk_table_set_row_spacings(GTK_TABLE (table), 5);
+    gtk_table_set_col_spacings(GTK_TABLE (table), 5);
+    gtk_widget_show (table);
+
+    // Add list of rooms. Use columns 0 to 4 (exclusive) and rows 0 to 4 (exclusive)
+    list_rooms = gtk_list_store_new (1, G_TYPE_STRING);
+    update_list_rooms();
+    list = create_list ("Rooms", list_rooms);
+    gtk_table_attach_defaults (GTK_TABLE (table), list, 2, 4, 0, 2);
+    gtk_widget_show (list);
+   
+    // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive)
+    messages = create_text ("");
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+    gtk_widget_show (messages);
+
+    // Add list of Users.
+    users_list = gtk_list_store_new (1, G_TYPE_STRING);
+    users = create_list ("Users", users_list);
+    gtk_table_attach_defaults (GTK_TABLE (table), users, 0, 2, 0, 2);
+    gtk_widget_show (users);
+
+    // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
+    myMessage = create_text ("");
+    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
+    gtk_widget_show (myMessage);
+
+    // Create room button
+    GtkWidget *create_button = gtk_button_new_with_label ("Create Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), create_button, 0, 1, 7, 8); 
+    gtk_widget_show (create_button);
+
+    // login
+    GtkWidget *join_button = gtk_button_new_with_label ("New User/\n   Log In");
+    gtk_table_attach_defaults(GTK_TABLE (table), join_button, 1, 2, 7, 8);
+    gtk_widget_show (join_button);
+
+    // Leave Room button
+    GtkWidget *leave_button = gtk_button_new_with_label ("Enter or Leave\n      Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), leave_button, 2, 3, 7, 8);
+    gtk_widget_show (leave_button);
+
+    // Send Button
+    GtkWidget *send_button = gtk_button_new_with_label ("Send");
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 3, 4, 7, 8);
+    gtk_widget_show (send_button);
+ 
+    gtk_widget_show (table);
+    gtk_widget_show (window);
+
+    gtk_main ();
+
+    return;
 }
 
 int main( int   argc,
