@@ -5,6 +5,7 @@
 GtkListStore * list_rooms;
 GtkListStore * users_list;
 GtkTextBuffer * buffer;
+GtkTextBuffer * passwordBuffer;
 
 void update_list_rooms() {
     GtkTreeIter iter;
@@ -28,7 +29,11 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
 }
 
 void logOn_clicked (GtkWidget *widget, gpointer data) {
-    g_print("logged on\n");
+    GtkTextIter start, end;
+    gtk_text_buffer_get_start_iter(buffer, &start);
+    gtk_text_buffer_get_end_iter(passwordBuffer, &end);
+    gchar*  password = (char *) gtk_text_buffer_get_text(passwordBuffer, &start, &end, false);
+    g_print("%s\n", password);
 }
 
 void send_clicked (GtkWidget *widget, gpointer data) {
@@ -135,23 +140,21 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_table_set_row_spacings(GTK_TABLE (table), 5);
     gtk_table_set_col_spacings(GTK_TABLE (table), 5);
     gtk_widget_show (table);
-
-    // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive)
+    
+    //Collects the Users name
     name = gtk_text_view_new ();
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (name));
     gtk_text_buffer_set_text (buffer, "Name", -1);
     gtk_table_attach_defaults (GTK_TABLE (table), name, 0, 2, 0, 1);
     gtk_widget_show(name);
-   
-   /*name = create_text ("Name");
-    gtk_table_attach_defaults (GtkEditable, name, 0, 2, 0, 1);
-    gtk_widget_show (name);
-*/
-    // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
-    password = create_text ("Password");
-    gtk_table_attach_defaults (GTK_TABLE (table), password, 2, 4, 0, 1);
-    gtk_widget_show (password);
-
+ 
+    //Collects password
+    password = gtk_text_view_new ();
+    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (password));
+    gtk_text_buffer_set_text (buffer, "Password", -1);
+    gtk_table_attach_defaults (GTK_TABLE (table), password, 0, 2, 0, 1);
+    gtk_widget_show(password);
+    
     // Create room button
     GtkWidget *newUsr_button = gtk_button_new_with_label ("Add User");
     gtk_table_attach_defaults(GTK_TABLE (table), newUsr_button, 0, 2, 1, 2); 
