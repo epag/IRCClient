@@ -19,7 +19,7 @@ void update_list_rooms() {
 }
 
 void send_clicked (GtkWidget *widget, gpointer data) {
-
+    g_print("sent\n");
 } 
 
 void join_clicked (GtkWidget *widget, gpointer data) {
