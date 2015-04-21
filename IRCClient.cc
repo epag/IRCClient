@@ -112,14 +112,14 @@ void log_clicked (GtkWidget *widget, gpointer data) {
 
    
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title (GTK_WINDOW (window), "Paned Windows");
+    gtk_window_set_title (GTK_WINDOW (window), "Log In Window");
     g_signal_connect (window, "destroy",
 	              G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
     gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
 
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
-    GtkWidget *table = gtk_table_new (7, 4, TRUE);
+    GtkWidget *table = gtk_table_new (5, 4, TRUE);
     gtk_container_add (GTK_CONTAINER (window), table);
     gtk_table_set_row_spacings(GTK_TABLE (table), 5);
     gtk_table_set_col_spacings(GTK_TABLE (table), 5);
@@ -127,12 +127,12 @@ void log_clicked (GtkWidget *widget, gpointer data) {
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive)
     messages = create_text ("Name");
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 2, 3, 4);
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 2, 1, 2);
     gtk_widget_show (messages);
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
     myMessage = create_text ("Password");
-    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 4, 3, 4);
+    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 4, 1, 2);
     gtk_widget_show (myMessage);
 
     // Create room button
