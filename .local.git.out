@@ -66,3 +66,6 @@
 [master 166a907] Make IRCclient
  4 files changed, 14 insertions(+), 7 deletions(-)
  create mode 100644 .talk-client.c.swp
+[master c43e044] Make IRCclient
+ 4 files changed, 4 insertions(+), 1 deletion(-)
+ delete mode 100644 .talk-client.c.swp
