@@ -151,7 +151,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
  
     //Collects password
     password = gtk_text_view_new ();
-    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (password));
+    passwordBuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (password));
     gtk_text_buffer_set_text (passwordBuffer, "Password", -1);
     gtk_table_attach_defaults (GTK_TABLE (table), password, 2, 4, 0, 1);
     gtk_widget_show(password);
