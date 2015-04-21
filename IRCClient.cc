@@ -153,7 +153,7 @@ int main( int   argc,
 
     // Leave Room button
     GtkWidget *leave_button = gtk_button_new_with_label ("Leave Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), leave_button, 1, 2, 7, 8);
+    gtk_table_attach_defaults(GTK_TABLE (table), leave_button, 2, 3, 7, 8);
     gtk_widget_show (leave_button);
     
     gtk_widget_show (table);
