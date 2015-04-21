@@ -25,7 +25,7 @@ TestIRCServer: TestIRCServer.c
 	g++ -g -o TestIRCServer TestIRCServer.c
 
 IRCClient: IRCClient.cc
-	gcc -g -o IRCClient IRCClient.cc
+	g++ -g -o IRCClient IRCClient.cc
 
 clean:
 	rm -f hello panned entry radio timer TestIRCServer
