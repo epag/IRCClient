@@ -130,7 +130,7 @@ int main( int   argc,
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
 
-    //Add list of Users.
+    // Add list of Users.
     users_list = gtk_list_store_new (1, G_TYPE_STRING);
     users = create_list ("Users", users_list);
     gtk_table_attach_defaults (GTK_TABLE (table), users, 0, 2, 0, 2);
@@ -145,6 +145,11 @@ int main( int   argc,
     GtkWidget *send_button = gtk_button_new_with_label ("Send");
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 0, 1, 7, 8); 
     gtk_widget_show (send_button);
+
+    // Join Room button
+    GtkWidget *join_button = gtk_button_new_with_label ("Join Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 5, 6, 7, 8);
+    gtk_widget_show (join_button);
     
     gtk_widget_show (table);
     gtk_widget_show (window);
