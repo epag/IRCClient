@@ -126,7 +126,6 @@ int main( int   argc,
     gtk_widget_show (list);
    
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
-    messages = create_text ("Peter: Hi how are you\nMary: I am fine, thanks and you?\nPeter: Fine thanks.\n");
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
 
@@ -152,7 +151,7 @@ int main( int   argc,
     gtk_widget_show (join_button);
 
     // Leave Room button
-    GtkWidget *leave_button = gtk_button_new_with_label ("Enter or Leave\n       Room");
+    GtkWidget *leave_button = gtk_button_new_with_label ("Enter or Leave\n      Room");
     gtk_table_attach_defaults(GTK_TABLE (table), leave_button, 2, 3, 7, 8);
     gtk_widget_show (leave_button);
 
