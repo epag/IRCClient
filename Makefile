@@ -1,5 +1,5 @@
 
-goal: hello entry panned radio TestIRCServer timer git
+goal: hello entry panned radio TestIRCServer timer IRCClient git
 
 git:
 	git add -A >> .local.git.out
@@ -25,7 +25,7 @@ TestIRCServer: TestIRCServer.c
 	g++ -g -o TestIRCServer TestIRCServer.c
 
 IRCClient: IRCClient.cc
-	g++ -g -o IRCClient IRCClient.cc
+	g++ IRCClient.cc -o IRCClient `pkg-config --cflags --libs gtk+-2.0`
 
 clean:
 	rm -f hello panned entry radio timer TestIRCServer
