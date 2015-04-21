@@ -6,6 +6,8 @@ GtkListStore * list_rooms;
 GtkListStore * users_list;
 GtkTextBuffer * buffer;
 GtkTextBuffer * passwordBuffer;
+GtkWidget *LogOnwindow;
+
 
 void update_list_rooms() {
     GtkTreeIter iter;
@@ -31,7 +33,7 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
     gchar* password = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     g_print("%s %s\n", name, password);
-    gtk_main_quit();
+    gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
 
 void logOn_clicked (GtkWidget *widget, gpointer data) {
@@ -131,23 +133,23 @@ static GtkWidget *create_text( const char * initialText )
    return scrolled_window;
 }
 void log_clicked (GtkWidget *widget, gpointer data) {
-    GtkWidget *window;
+
     GtkWidget *list;
     GtkWidget *name;
     GtkWidget *password;
     GtkWidget *users;
 
    
-    window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title (GTK_WINDOW (window), "Log In Window");
-    g_signal_connect (window, "destroy",
+    LogOnwindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title (GTK_WINDOW (LogOnwindow), "Log In Window");
+    g_signal_connect (LogOnwindow, "destroy",
 	              G_CALLBACK (gtk_main_quit), NULL);
-    gtk_container_set_border_width (GTK_CONTAINER (window), 10);
-    gtk_widget_set_size_request (GTK_WIDGET (window), 250, 100);
+    gtk_container_set_border_width (GTK_CONTAINER (LogOnwindow), 10);
+    gtk_widget_set_size_request (GTK_WIDGET (LogOnwindow), 250, 100);
 
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
     GtkWidget *table = gtk_table_new (2, 4, TRUE);
-    gtk_container_add (GTK_CONTAINER (window), table);
+    gtk_container_add (GTK_CONTAINER (LogOnwindow), table);
     gtk_table_set_row_spacings(GTK_TABLE (table), 5);
     gtk_table_set_col_spacings(GTK_TABLE (table), 5);
     gtk_widget_show (table);
@@ -177,7 +179,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_widget_show (logOn_button);
  
     gtk_widget_show (table);
-    gtk_widget_show (window);
+    gtk_widget_show (LogOnwindow);
 
     g_signal_connect (G_OBJECT(logOn_button), "clicked", G_CALLBACK(logOn_clicked), NULL);
     g_signal_connect (G_OBJECT(newUsr_button), "clicked", G_CALLBACK(newUsr_clicked), NULL);
