@@ -4,6 +4,7 @@
 
 GtkListStore * list_rooms;
 GtkListStore * users_list;
+GtkTextBuffer * buffer;
 
 void update_list_rooms() {
     GtkTreeIter iter;
@@ -19,6 +20,10 @@ void update_list_rooms() {
 }
 
 void newUsr_clicked (GtkWidget *widget, gpointer data) {
+    GtkTextIter start, end;
+    gtk_text_buffer_get_start_iter(buffer, &start);
+    gtk_text_buffer_get_end_iter(buffer, &end);
+    gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
     g_print("Account created!\n");
 }
 
@@ -112,8 +117,8 @@ static GtkWidget *create_text( const char * initialText )
 void log_clicked (GtkWidget *widget, gpointer data) {
     GtkWidget *window;
     GtkWidget *list;
-    GtkWidget *messages;
-    GtkWidget *myMessage;
+    GtkWidget *name;
+    GtkWidget *password;
     GtkWidget *users;
 
    
@@ -132,14 +137,18 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_widget_show (table);
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive)
-    messages = create_text ("Name");
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 2, 0, 1);
-    gtk_widget_show (messages);
-
+    name = gtk_text_view_new ();
+    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (name));
+    gtk_text_buffer_set_text (buffer, "Name", -1);
+   
+   /*name = create_text ("Name");
+    gtk_table_attach_defaults (GtkEditable, name, 0, 2, 0, 1);
+    gtk_widget_show (name);
+*/
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
-    myMessage = create_text ("Password");
-    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 4, 0, 1);
-    gtk_widget_show (myMessage);
+    password = create_text ("Password");
+    gtk_table_attach_defaults (GTK_TABLE (table), password, 2, 4, 0, 1);
+    gtk_widget_show (password);
 
     // Create room button
     GtkWidget *newUsr_button = gtk_button_new_with_label ("Add User");
