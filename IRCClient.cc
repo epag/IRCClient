@@ -137,12 +137,12 @@ void log_clicked (GtkWidget *widget, gpointer data) {
 
     // Create room button
     GtkWidget *create_button = gtk_button_new_with_label ("Add User");
-    gtk_table_attach_defaults(GTK_TABLE (table), create_button, 0, 1, 1, 2); 
+    gtk_table_attach_defaults(GTK_TABLE (table), create_button, 0, 2, 1, 2); 
     gtk_widget_show (create_button);
 
     // Send Button
     GtkWidget *send_button = gtk_button_new_with_label ("Log In");
-    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 3, 4, 1, 2);
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 2, 4, 1, 2);
     gtk_widget_show (send_button);
  
     gtk_widget_show (table);
