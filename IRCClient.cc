@@ -18,6 +18,14 @@ void update_list_rooms() {
     }
 }
 
+void newUsr_clicked (GtkWidget *widget, gpointer data) {
+    g_print("Account created!\n");
+}
+
+void logOn_clicked (GtkWidget *widget, gpointer data) {
+    g_print("logged on\n");
+}
+
 void send_clicked (GtkWidget *widget, gpointer data) {
     g_print("sent\n");
 } 
@@ -136,14 +144,14 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_widget_show (myMessage);
 
     // Create room button
-    GtkWidget *create_button = gtk_button_new_with_label ("Add User");
-    gtk_table_attach_defaults(GTK_TABLE (table), create_button, 0, 2, 1, 2); 
-    gtk_widget_show (create_button);
+    GtkWidget *newUsr_button = gtk_button_new_with_label ("Add User");
+    gtk_table_attach_defaults(GTK_TABLE (table), newUsr_button, 0, 2, 1, 2); 
+    gtk_widget_show (newUsr_button);
 
     // Send Button
-    GtkWidget *send_button = gtk_button_new_with_label ("Log In");
-    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 2, 4, 1, 2);
-    gtk_widget_show (send_button);
+    GtkWidget *logOn_button = gtk_button_new_with_label ("Log In");
+    gtk_table_attach_defaults(GTK_TABLE (table), logOn_button, 2, 4, 1, 2);
+    gtk_widget_show (logOn_button);
  
     gtk_widget_show (table);
     gtk_widget_show (window);
