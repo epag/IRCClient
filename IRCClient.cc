@@ -162,7 +162,7 @@ int main( int   argc,
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 3, 4, 7, 8);
     gtk_widget_show (send_button);
  
-    //g_signal_connect (G_OBJECT(send_button), "clicked", G_CALLBACK(send_clicked), NULL);
+    g_signal_connect (G_OBJECT(send_button), "clicked", G_CALLBACK(send_clicked), NULL);
     gtk_widget_show (table);
     gtk_widget_show (window);
 
