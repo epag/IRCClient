@@ -147,7 +147,7 @@ int main( int   argc,
     gtk_widget_show (create_button);
 
     // login
-    GtkWidget *join_button = gtk_button_new_with_label ("New User/Log In");
+    GtkWidget *join_button = gtk_button_new_with_label ("New User\nLog In");
     gtk_table_attach_defaults(GTK_TABLE (table), join_button, 1, 2, 7, 8);
     gtk_widget_show (join_button);
 
