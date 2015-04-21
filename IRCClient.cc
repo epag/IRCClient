@@ -125,23 +125,10 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_table_set_col_spacings(GTK_TABLE (table), 5);
     gtk_widget_show (table);
 
-    // Add list of rooms. Use columns 0 to 4 (exclusive) and rows 0 to 4 (exclusive)
-    list_rooms = gtk_list_store_new (1, G_TYPE_STRING);
-    update_list_rooms();
-    list = create_list ("Rooms", list_rooms);
-    gtk_table_attach_defaults (GTK_TABLE (table), list, 2, 4, 0, 2);
-    gtk_widget_show (list);
-   
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive)
-    messages = create_text ("");
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+    messages = create_text ("Name");
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 2, 3, 4);
     gtk_widget_show (messages);
-
-    // Add list of Users.
-    users_list = gtk_list_store_new (1, G_TYPE_STRING);
-    users = create_list ("Users", users_list);
-    gtk_table_attach_defaults (GTK_TABLE (table), users, 0, 2, 0, 2);
-    gtk_widget_show (users);
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
     myMessage = create_text ("");
