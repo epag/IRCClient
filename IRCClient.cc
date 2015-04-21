@@ -27,10 +27,10 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
     g_print("%s\n", name);
 
-
-    gtk_text_buffer_get_start_iter(passwordBuffer, &start);
-    gtk_text_buffer_get_end_iter(passwordBuffer, &end);
-    gchar* password = (char *) gtk_text_buffer_get_text(passwordBuffer, &start, &end, false);
+    GtkTextIter start2, end2;
+    gtk_text_buffer_get_start_iter(passwordBuffer, &start2);
+    gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
+    gchar* password = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     g_print("%s\n", password);
 }
 
