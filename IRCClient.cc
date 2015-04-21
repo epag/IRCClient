@@ -140,6 +140,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     name = gtk_text_view_new ();
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (name));
     gtk_text_buffer_set_text (buffer, "Name", -1);
+    gtk_widget_show(name);
    
    /*name = create_text ("Name");
     gtk_table_attach_defaults (GtkEditable, name, 0, 2, 0, 1);
