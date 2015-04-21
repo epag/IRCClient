@@ -24,7 +24,7 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
     gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
-    g_print("Account created!\n");
+    g_print("%s\n", name);
 }
 
 void logOn_clicked (GtkWidget *widget, gpointer data) {
