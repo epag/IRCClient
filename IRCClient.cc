@@ -150,6 +150,11 @@ int main( int   argc,
     GtkWidget *join_button = gtk_button_new_with_label ("Join Room");
     gtk_table_attach_defaults(GTK_TABLE (table), join_button, 1, 2, 7, 8);
     gtk_widget_show (join_button);
+
+    // Leave Room button
+    GtkWidget *leave_button = gtk_button_new_with_label ("Leave Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), leave_button, 1, 2, 7, 8);
+    gtk_widget_show (leave_button);
     
     gtk_widget_show (table);
     gtk_widget_show (window);
