@@ -131,8 +131,8 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_widget_show (messages);
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
-    myMessage = create_text ("");
-    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
+    myMessage = create_text ("Password");
+    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 2, 4, 3, 4);
     gtk_widget_show (myMessage);
 
     // Create room button
