@@ -119,7 +119,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
 
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
-    GtkWidget *table = gtk_table_new (5, 4, TRUE);
+    GtkWidget *table = gtk_table_new (3, 4, TRUE);
     gtk_container_add (GTK_CONTAINER (window), table);
     gtk_table_set_row_spacings(GTK_TABLE (table), 5);
     gtk_table_set_col_spacings(GTK_TABLE (table), 5);
@@ -136,23 +136,13 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_widget_show (myMessage);
 
     // Create room button
-    GtkWidget *create_button = gtk_button_new_with_label ("Create Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), create_button, 0, 1, 7, 8); 
+    GtkWidget *create_button = gtk_button_new_with_label ("Add User");
+    gtk_table_attach_defaults(GTK_TABLE (table), create_button, 0, 1, 1, 2); 
     gtk_widget_show (create_button);
 
-    // login
-    GtkWidget *join_button = gtk_button_new_with_label ("New User/\n   Log In");
-    gtk_table_attach_defaults(GTK_TABLE (table), join_button, 1, 2, 7, 8);
-    gtk_widget_show (join_button);
-
-    // Leave Room button
-    GtkWidget *leave_button = gtk_button_new_with_label ("Enter or Leave\n      Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), leave_button, 2, 3, 7, 8);
-    gtk_widget_show (leave_button);
-
     // Send Button
-    GtkWidget *send_button = gtk_button_new_with_label ("Send");
-    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 3, 4, 7, 8);
+    GtkWidget *send_button = gtk_button_new_with_label ("Log In");
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 3, 4, 1, 2);
     gtk_widget_show (send_button);
  
     gtk_widget_show (table);
@@ -162,7 +152,6 @@ void log_clicked (GtkWidget *widget, gpointer data) {
 
     return;
 }
-
 int main( int   argc,
           char *argv[] )
 {
