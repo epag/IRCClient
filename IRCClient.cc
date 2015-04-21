@@ -110,8 +110,6 @@ static GtkWidget *create_text( const char * initialText )
    return scrolled_window;
 }
 void log_clicked (GtkWidget *widget, gpointer data) {
-    g_print("logged on\n");
-    g_print("send\n");
     GtkWidget *window;
     GtkWidget *list;
     GtkWidget *messages;
