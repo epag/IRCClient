@@ -116,7 +116,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     g_signal_connect (window, "destroy",
 	              G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
-    gtk_widget_set_size_request (GTK_WIDGET (window), 150, 200);
+    gtk_widget_set_size_request (GTK_WIDGET (window), 250, 100);
 
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
     GtkWidget *table = gtk_table_new (3, 4, TRUE);
