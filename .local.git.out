@@ -98,3 +98,6 @@
 [master 5022e79] Make IRCclient
  4 files changed, 3 insertions(+), 1 deletion(-)
  create mode 100755 .nfs0000000001b5415600001c33
+[master 70dee63] Make IRCclient
+ 4 files changed, 4 insertions(+), 1 deletion(-)
+ rename .nfs0000000001b5415600001c33 => .nfs0000000001b55a9400001c34 (90%)

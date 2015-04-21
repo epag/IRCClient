@@ -13,12 +13,13 @@ void update_list_rooms() {
     for (i = 0; i < 10; i++) {
         gchar *msg = g_strdup_printf ("Room %d", i);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
-        gtk_list_store_set (GTK_LIST_STORE (list_rooms), 
-	                    &iter,
-                            0, msg,
-	                    -1);
-	g_free (msg);
+        gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
+	    g_free (msg);
     }
+}
+
+void send_clicked (GtkWidget *widget, gpointer data) {
+    g_print("send\n");
 }
 
 /* Create the list of "messages" */
@@ -160,7 +161,8 @@ int main( int   argc,
     GtkWidget *send_button = gtk_button_new_with_label ("Send");
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 3, 4, 7, 8);
     gtk_widget_show (send_button);
-    
+ 
+    g_signal_connect (G_OBJECT(send_button), "clicked", G_CALLBACK(send_clicked), NULL);
     gtk_widget_show (table);
     gtk_widget_show (window);
 
