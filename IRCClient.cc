@@ -20,6 +20,16 @@ void update_list_rooms() {
 
 void send_clicked (GtkWidget *widget, gpointer data) {
     g_print("send\n");
+} 
+
+void join_clicked (GtkWidget *widget, gpointer data) {
+    g_print("join\n");
+}
+void create_clicked (GtkWidget *widget, gpointer data) {
+    g_print("create\n");
+}
+void log_clicked (GtkWidget *widget, gpointer data) {
+    g_print("logged on\n");
 }
 
 /* Create the list of "messages" */
@@ -163,6 +173,9 @@ int main( int   argc,
     gtk_widget_show (send_button);
  
     g_signal_connect (G_OBJECT(send_button), "clicked", G_CALLBACK(send_clicked), NULL);
+    g_signal_connect (G_OBJECT(leave_button), "clicked", G_CALLBACK(join_clicked), NULL);
+    g_signal_connect (G_OBJECT(create_button), "clicked", G_CALLBACK(create_clicked), NULL);
+    g_signal_connect (G_OBJECT(join_button), "clicked", G_CALLBACK(log_clicked), NULL);
     gtk_widget_show (table);
     gtk_widget_show (window);
 
