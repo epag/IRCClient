@@ -148,7 +148,7 @@ int main( int   argc,
 
     // Join Room button
     GtkWidget *join_button = gtk_button_new_with_label ("Join Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 1, 2, 7, 8);
+    gtk_table_attach_defaults(GTK_TABLE (table), join_button, 1, 2, 7, 8);
     gtk_widget_show (join_button);
     
     gtk_widget_show (table);
