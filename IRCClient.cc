@@ -142,13 +142,13 @@ int main( int   argc,
     gtk_widget_show (myMessage);
 
     // Add send button. Use columns 0 to 1 (exclusive) and rows 4 to 7 (exclusive)
-    GtkWidget *send_button = gtk_button_new_with_label ("join");
+    GtkWidget *send_button = gtk_button_new_with_label ("Show");
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 0, 1, 7, 8); 
     gtk_widget_show (send_button);
 
     // Join Room button
     GtkWidget *join_button = gtk_button_new_with_label ("Join Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 4, 5, 7, 8);
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 1, 2, 7, 8);
     gtk_widget_show (join_button);
     
     gtk_widget_show (table);
