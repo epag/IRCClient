@@ -141,20 +141,25 @@ int main( int   argc,
     gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
     gtk_widget_show (myMessage);
 
-    // Add send button. Use columns 0 to 1 (exclusive) and rows 4 to 7 (exclusive)
-    GtkWidget *send_button = gtk_button_new_with_label ("Send");
-    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 0, 1, 7, 8); 
-    gtk_widget_show (send_button);
+    // Create room button
+    GtkWidget *create_button = gtk_button_new_with_label ("Create Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), create_button, 0, 1, 7, 8); 
+    gtk_widget_show (create_button);
 
-    // Join Room button
-    GtkWidget *join_button = gtk_button_new_with_label ("Join Room");
+    // login
+    GtkWidget *join_button = gtk_button_new_with_label ("Create User/Log In");
     gtk_table_attach_defaults(GTK_TABLE (table), join_button, 1, 2, 7, 8);
     gtk_widget_show (join_button);
 
     // Leave Room button
-    GtkWidget *leave_button = gtk_button_new_with_label ("Leave Room");
+    GtkWidget *leave_button = gtk_button_new_with_label ("Enter/Leave Room");
     gtk_table_attach_defaults(GTK_TABLE (table), leave_button, 2, 3, 7, 8);
     gtk_widget_show (leave_button);
+
+    // Send Button
+    GtkWidget *send_button = gtk_button_new_with_label ("Send");
+    gtk_table_attach_defaults(GTK_TABLE (table), send_button, 3, 4, 7, 8);
+    gtk_widget_show (send_button);
     
     gtk_widget_show (table);
     gtk_widget_show (window);
