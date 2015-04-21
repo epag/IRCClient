@@ -156,8 +156,8 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_widget_show (table);
     gtk_widget_show (window);
 
-    g_signal_connect (G_OBJECT(logOn_button), "clicked", G_CALLBACK(send_clicked), NULL);
-    g_signal_connect (G_OBJECT(newUsr_button), "clicked", G_CALLBACK(join_clicked), NULL);
+    g_signal_connect (G_OBJECT(logOn_button), "clicked", G_CALLBACK(logOn_clicked), NULL);
+    g_signal_connect (G_OBJECT(newUsr_button), "clicked", G_CALLBACK(newUsr_clicked), NULL);
     gtk_main ();
 
     return;
