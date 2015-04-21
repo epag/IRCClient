@@ -31,6 +31,7 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
     gchar* password = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     g_print("%s %s\n", name, password);
+    gtk_main_quit();
 }
 
 void logOn_clicked (GtkWidget *widget, gpointer data) {
@@ -178,8 +179,8 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_widget_show (table);
     gtk_widget_show (window);
 
-    g_signal_connect (G_OBJECT(logOn_button), "destroy", G_CALLBACK(logOn_clicked), NULL);
-    g_signal_connect (G_OBJECT(newUsr_button), "destroy", G_CALLBACK(newUsr_clicked), NULL);
+    g_signal_connect (G_OBJECT(logOn_button), "clicked", G_CALLBACK(logOn_clicked), NULL);
+    g_signal_connect (G_OBJECT(newUsr_button), "clicked", G_CALLBACK(newUsr_clicked), NULL);
     gtk_main ();
 
     return;
