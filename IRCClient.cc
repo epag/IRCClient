@@ -100,7 +100,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_start_iter(messageBuffer, &start);
     gtk_text_buffer_get_end_iter(messageBuffer, &end);
     strcat(sentMessage, (char *) gtk_text_buffer_get_text(messageBuffer, &start, &end, false));
-    sprintf(sentMessage, "\n"),
+    sprintf(sentMessage, "%s\n", sentMessage),
 
     messages = create_text(sentMessage);
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
