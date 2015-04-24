@@ -42,10 +42,9 @@ static GtkWidget *create_text( const char * initialText )
 {
    GtkWidget *scrolled_window;
    GtkWidget *view;
-   GtkTextBuffer *buffer;
 
    view = gtk_text_view_new ();
-   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+   messageBuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
    scrolled_window = gtk_scrolled_window_new (NULL, NULL);
    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
@@ -53,7 +52,7 @@ static GtkWidget *create_text( const char * initialText )
 				   GTK_POLICY_AUTOMATIC);
 
    gtk_container_add (GTK_CONTAINER (scrolled_window), view);
-   insert_text (buffer, initialText);
+   insert_text (messageBuffer, initialText);
    gtk_text_view_set_editable(GTK_TEXT_VIEW (view), false);
 
    gtk_widget_show_all (scrolled_window);
