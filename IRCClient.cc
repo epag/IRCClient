@@ -4,11 +4,12 @@
 
 GtkListStore * list_rooms;
 GtkListStore * users_list;
+GtkTextBuffer * messageBuffer;
 GtkTextBuffer * buffer;
 GtkTextBuffer * passwordBuffer;
 GtkWidget *LogOnwindow;
 char * user_name;
-
+char * user_password;
 
 void update_list_rooms() {
     GtkTreeIter iter;
@@ -35,6 +36,8 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
     gchar* password = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     g_print("%s %s\n", name, password);
+    user_password = password;
+
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
 
@@ -43,12 +46,15 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
     gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
+    user_name = name;
 
     GtkTextIter start2, end2;
     gtk_text_buffer_get_start_iter(passwordBuffer, &start2);
     gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
     gchar* password = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     g_print("%s %s\n", name, password);
+    user_password = password;
+
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
 
@@ -234,7 +240,7 @@ int main( int   argc,
     gtk_widget_show (users);
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
-    myMessage = create_text ("");
+    myMessage = create_text (" hello ");
     gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
     gtk_widget_show (myMessage);
 
