@@ -51,7 +51,7 @@ static GtkWidget *create_text( const char * initialText )
    scrolled_window = gtk_scrolled_window_new (NULL, NULL);
    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
 		   	           GTK_POLICY_AUTOMATIC,
-				   GTK_POLICY_AUTOMATIC);
+				   GTK_POLICY_ALWAYS);
 
    gtk_container_add (GTK_CONTAINER (scrolled_window), view);
    insert_text (chatLog, initialText);
