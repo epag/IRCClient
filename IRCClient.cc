@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
 
+
+GtkWidget *messages;
 GtkListStore * list_rooms;
 GtkListStore * users_list;
 GtkTextBuffer * messageBuffer;
@@ -209,7 +211,7 @@ int main( int   argc,
 {
     GtkWidget *window;
     GtkWidget *list;
-    GtkWidget *messages;
+
     GtkWidget *myMessage;
     GtkWidget *users;
 
