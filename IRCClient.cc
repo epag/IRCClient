@@ -10,6 +10,7 @@ GtkTextBuffer * passwordBuffer;
 GtkWidget *LogOnwindow;
 char * user_name;
 char * user_password;
+char * sentMessage;
 
 void update_list_rooms() {
     GtkTreeIter iter;
@@ -60,10 +61,11 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
 
 void send_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start, end;
-    gtk_text_buffer_get_start_iter(buffer, &start);
-    gtk_text_buffer_get_end_iter(buffer, &end);
-    gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
-
+    gtk_text_buffer_get_start_iter(messageBuffer, &start);
+    gtk_text_buffer_get_end_iter(messageBuffer, &end);
+    gchar* sendMessage = (char *) gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
+    gtk_text_buffer_set_text (buffer, "\0", -1);
+    
 } 
 
 void join_clicked (GtkWidget *widget, gpointer data) {
@@ -234,7 +236,7 @@ int main( int   argc,
     gtk_widget_show (list);
    
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive)
-    messages = create_text ("i love kak");
+    messages = create_text ("");
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
 
