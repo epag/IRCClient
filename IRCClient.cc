@@ -1,4 +1,4 @@
-
+#include <string.h>
 #include <stdio.h>
 #include <gtk/gtk.h>
 
@@ -98,7 +98,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start, end;
     gtk_text_buffer_get_start_iter(messageBuffer, &start);
     gtk_text_buffer_get_end_iter(messageBuffer, &end);
-    sentMessage =+ (char *) gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
+    strcat(sentMessage, (char *) gtk_text_buffer_get_text(messageBuffer, &start, &end, false));
     printf("%s\n", sentMessage);
 
     messages = create_text(sentMessage);
