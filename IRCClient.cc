@@ -9,6 +9,7 @@ GtkListStore * users_list;
 GtkTextBuffer * messageBuffer;
 GtkTextBuffer * buffer;
 GtkTextBuffer * passwordBuffer;
+GtkTextBuffer * chatLog;
 GtkWidget *LogOnwindow;
 char * user_name;
 char * user_password;
@@ -44,7 +45,7 @@ static GtkWidget *create_text( const char * initialText )
    GtkWidget *view;
 
    view = gtk_text_view_new ();
-   messageBuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+   chatLog = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
    scrolled_window = gtk_scrolled_window_new (NULL, NULL);
    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
@@ -52,7 +53,7 @@ static GtkWidget *create_text( const char * initialText )
 				   GTK_POLICY_AUTOMATIC);
 
    gtk_container_add (GTK_CONTAINER (scrolled_window), view);
-   insert_text (messageBuffer, initialText);
+   insert_text (chatLog, initialText);
 
    gtk_widget_show_all (scrolled_window);
 
