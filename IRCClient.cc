@@ -263,11 +263,9 @@ int main( int   argc,
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
-    myMessage = gtk_text_view_new ();
-    messageBuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (myMessage));
-    gtk_text_buffer_set_text (buffer, "", -1);
-    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
-    gtk_widget_show(myMessage);
+    messages = create_text ("");
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 1, 2);
+    gtk_widget_show (messages);
 
     // Create room button
     GtkWidget *create_button = gtk_button_new_with_label ("Create Room");
