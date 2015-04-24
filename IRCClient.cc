@@ -103,9 +103,6 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     printf("%s\n", sentMessage);
 
     insert_text(buffer, sentMessage);
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
-    gtk_widget_show (messages);
-    gtk_text_buffer_set_text (messageBuffer, "\0", -1);
     
 } 
 
