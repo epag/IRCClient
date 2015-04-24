@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
 
-
+GtkWidget *table;
 GtkWidget *messages;
 GtkListStore * list_rooms;
 GtkListStore * users_list;
@@ -25,6 +25,40 @@ void update_list_rooms() {
         gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
 	    g_free (msg);
     }
+}
+
+
+static void insert_text( GtkTextBuffer *buffer, const char * initialText )
+{
+   GtkTextIter iter;
+ 
+   gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
+   gtk_text_buffer_insert (buffer, &iter, initialText,-1);
+}
+
+
+
+static GtkWidget *create_text( const char * initialText )
+{
+   GtkWidget *scrolled_window;
+   GtkWidget *view;
+   GtkTextBuffer *buffer;
+
+   view = gtk_text_view_new ();
+   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+
+   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+		   	           GTK_POLICY_AUTOMATIC,
+				   GTK_POLICY_AUTOMATIC);
+
+   gtk_container_add (GTK_CONTAINER (scrolled_window), view);
+   insert_text (buffer, initialText);
+   gtk_text_view_set_editable(GTK_TEXT_VIEW (view), false);
+
+   gtk_widget_show_all (scrolled_window);
+
+   return scrolled_window;
 }
 
 void newUsr_clicked (GtkWidget *widget, gpointer data) {
@@ -67,6 +101,11 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_end_iter(messageBuffer, &end);
     sentMessage = (char *) gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
     printf("%s\n", sentMessage);
+
+    messages = create_text (sentMessage);
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+    gtk_widget_show (messages);
+
     gtk_text_buffer_set_text (messageBuffer, "\0", -1);
     
 } 
@@ -120,37 +159,10 @@ when our window is realized. We could also force our window to be
 realized with gtk_widget_realize, but it would have to be part of
 a hierarchy first */
 
-static void insert_text( GtkTextBuffer *buffer, const char * initialText )
-{
-   GtkTextIter iter;
- 
-   gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
-   gtk_text_buffer_insert (buffer, &iter, initialText,-1);
-}
+
    
 /* Create a scrolled text area that displays a "message" */
-static GtkWidget *create_text( const char * initialText )
-{
-   GtkWidget *scrolled_window;
-   GtkWidget *view;
-   GtkTextBuffer *buffer;
 
-   view = gtk_text_view_new ();
-   buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-
-   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-		   	           GTK_POLICY_AUTOMATIC,
-				   GTK_POLICY_AUTOMATIC);
-
-   gtk_container_add (GTK_CONTAINER (scrolled_window), view);
-   insert_text (buffer, initialText);
-   gtk_text_view_set_editable(GTK_TEXT_VIEW (view), false);
-
-   gtk_widget_show_all (scrolled_window);
-
-   return scrolled_window;
-}
 void log_clicked (GtkWidget *widget, gpointer data) {
 
     GtkWidget *list;
@@ -225,7 +237,7 @@ int main( int   argc,
     gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
 
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
-    GtkWidget *table = gtk_table_new (7, 4, TRUE);
+    table = gtk_table_new (7, 4, TRUE);
     gtk_container_add (GTK_CONTAINER (window), table);
     gtk_table_set_row_spacings(GTK_TABLE (table), 5);
     gtk_table_set_col_spacings(GTK_TABLE (table), 5);
