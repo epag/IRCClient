@@ -59,7 +59,11 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
 }
 
 void send_clicked (GtkWidget *widget, gpointer data) {
-    g_print("sent\n");
+    GtkTextIter start, end;
+    gtk_text_buffer_get_start_iter(buffer, &start);
+    gtk_text_buffer_get_end_iter(buffer, &end);
+    gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
+
 } 
 
 void join_clicked (GtkWidget *widget, gpointer data) {
@@ -136,6 +140,7 @@ static GtkWidget *create_text( const char * initialText )
 
    gtk_container_add (GTK_CONTAINER (scrolled_window), view);
    insert_text (buffer, initialText);
+   gtk_text_view_set_editable(GTK_TEXT_VIEW (view), false);
 
    gtk_widget_show_all (scrolled_window);
 
@@ -229,7 +234,7 @@ int main( int   argc,
     gtk_widget_show (list);
    
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive)
-    messages = create_text ("");
+    messages = create_text ("i love kak");
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
 
