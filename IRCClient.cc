@@ -53,7 +53,6 @@ static GtkWidget *create_text( const char * initialText )
 
    gtk_container_add (GTK_CONTAINER (scrolled_window), view);
    insert_text (messageBuffer, initialText);
-   gtk_text_view_set_editable(GTK_TEXT_VIEW (view), false);
 
    gtk_widget_show_all (scrolled_window);
 
