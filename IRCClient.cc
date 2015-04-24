@@ -106,7 +106,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
 
-    gtk_text_buffer_set_text (buffer, "", -1);
+    gtk_text_buffer_set_text (messageBuffer, "", -1);
 }
 
 void join_clicked (GtkWidget *widget, gpointer data) {
