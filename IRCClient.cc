@@ -7,6 +7,7 @@ GtkListStore * users_list;
 GtkTextBuffer * buffer;
 GtkTextBuffer * passwordBuffer;
 GtkWidget *LogOnwindow;
+char * user_name;
 
 
 void update_list_rooms() {
@@ -27,6 +28,7 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
     gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
+    user_name = name;
 
     GtkTextIter start2, end2;
     gtk_text_buffer_get_start_iter(passwordBuffer, &start2);
