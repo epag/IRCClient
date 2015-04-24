@@ -99,11 +99,12 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start, end;
     gtk_text_buffer_get_start_iter(messageBuffer, &start);
     gtk_text_buffer_get_end_iter(messageBuffer, &end);
-    sentMessage = (char *) gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
+    sentMessage =+ (char *) gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
     printf("%s\n", sentMessage);
 
-    insert_text(buffer, sentMessage);
-    
+    messages = create_text (sentMessage);
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+    gtk_widget_show (messages);
 } 
 
 void join_clicked (GtkWidget *widget, gpointer data) {
