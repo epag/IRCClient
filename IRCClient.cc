@@ -13,7 +13,7 @@ GtkTextBuffer * chatLog;
 GtkWidget *LogOnwindow;
 char * user_name;
 char * user_password;
-char * sentMessage;
+char * sentMessage = " ";
 
 void update_list_rooms() {
     GtkTreeIter iter;
