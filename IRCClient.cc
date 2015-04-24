@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <gtk/gtk.h>
 
@@ -13,7 +14,7 @@ GtkTextBuffer * chatLog;
 GtkWidget *LogOnwindow;
 char * user_name;
 char * user_password;
-char * sentMessage = " ";
+char * sentMessage;
 
 void update_list_rooms() {
     GtkTreeIter iter;
@@ -219,6 +220,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
 int main( int   argc,
           char *argv[] )
 {
+    sentMessage = (char *) malloc(sizeof(char) * 100000000);
     GtkWidget *window;
     GtkWidget *list;
 
