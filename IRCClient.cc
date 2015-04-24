@@ -63,7 +63,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start, end;
     gtk_text_buffer_get_start_iter(messageBuffer, &start);
     gtk_text_buffer_get_end_iter(messageBuffer, &end);
-    gchar* sendMessage = (char *) gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
+    sentMessage = (char *) gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
     gtk_text_buffer_set_text (messageBuffer, "\0", -1);
     
 } 
