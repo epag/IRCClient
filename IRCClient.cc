@@ -138,6 +138,7 @@ void get_rooms() {
     
     sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
     
+    printf ("%s", responce);
     int i = 1;
     int j = 0;
     int k;
