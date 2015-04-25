@@ -290,3 +290,5 @@
  delete mode 100644 .talk-client.c.swp
 [master 84a49df] Make IRCclient
  1 file changed, 3 insertions(+)
+[master e68142f] Make IRCclient
+ 3 files changed, 8 insertions(+), 6 deletions(-)

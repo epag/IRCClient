@@ -19,11 +19,12 @@ GtkTextBuffer * messageBuffer;
 GtkTextBuffer * buffer;
 GtkTextBuffer * passwordBuffer;
 GtkTextBuffer * chatLog;
-GtkWidget *LogOnwindow;
+GtkWidget * LogOnwindow;
+GtkWidget * CreateRoomwindow;
 char * user_name;
 char * user_password;
 char * sentMessage;
-
+char * RoomName[100];
 
 // CLIENT VARIABLES
 
@@ -125,7 +126,7 @@ void update_list_rooms() {
 
     /* Add some messages to the window */
     for (i = 0; i < 10; i++) {
-        gchar *msg = g_strdup_printf ("Room %d", i);
+        gchar *msg = g_strdup_printf ("%s", RoomName[i]);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
         gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
 	    g_free (msg);
@@ -219,8 +220,6 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     g_print("%s %s\n", name, passwords);
     password = passwords;
     
-    add_user();
-
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
 
@@ -241,8 +240,67 @@ void send_clicked (GtkWidget *widget, gpointer data) {
 void join_clicked (GtkWidget *widget, gpointer data) {
     g_print("join\n");
 }
+
+
+void newRoom_clicked (GtkWidget *widget, gpointer data) {
+    GtkTextIter start, end;
+    gtk_text_buffer_get_start_iter(buffer, &start);
+    gtk_text_buffer_get_end_iter(buffer, &end);
+    gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
+    user = name;
+
+    GtkTextIter start2, end2;
+    gtk_text_buffer_get_start_iter(passwordBuffer, &start2);
+    gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
+    gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
+    g_print("%s %s\n", name, passwords);
+    password = passwords;
+
+    add_user();
+
+
+    gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
+}
 void create_clicked (GtkWidget *widget, gpointer data) {
-    g_print("create\n");
+    GtkWidget *list;
+    GtkWidget *name;
+    GtkWidget *password;
+    GtkWidget *users;
+
+   
+    LogOnwindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title (GTK_WINDOW (LogOnwindow), "Create New Room");
+    g_signal_connect (LogOnwindow, "destroy",
+	              G_CALLBACK (gtk_main_quit), NULL);
+    gtk_container_set_border_width (GTK_CONTAINER (LogOnwindow), 10);
+    gtk_widget_set_size_request (GTK_WIDGET (LogOnwindow), 250, 100);
+
+    // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
+    GtkWidget *table = gtk_table_new (2, 4, TRUE);
+    gtk_container_add (GTK_CONTAINER (LogOnwindow), table);
+    gtk_table_set_row_spacings(GTK_TABLE (table), 5);
+    gtk_table_set_col_spacings(GTK_TABLE (table), 5);
+    gtk_widget_show (table);
+    
+    //Collects the Users name
+    name = gtk_text_view_new ();
+    buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (name));
+    gtk_text_buffer_set_text (buffer, "RoomName", -1);
+    gtk_table_attach_defaults (GTK_TABLE (table), name, 0, 2, 0, 1);
+    gtk_widget_show(name);
+    
+    // Create room button
+    GtkWidget *newRoom_button = gtk_button_new_with_label ("Create Room");
+    gtk_table_attach_defaults(GTK_TABLE (table), newRoom_button, 0, 2, 0, 2); 
+    gtk_widget_show (newRoom_button);
+    
+    gtk_widget_show (table);
+    gtk_widget_show (CreateRoomwindow);
+
+    g_signal_connect (G_OBJECT(newRoom_button), "clicked", G_CALLBACK(newRoom_clicked), NULL);
+    gtk_main ();
+
+    return;
 }
 
 
