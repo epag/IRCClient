@@ -212,7 +212,6 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_start_iter(passwordBuffer, &start2);
     gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
     gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
-    g_print("%s %s\n", name, passwords);
     password = passwords;
 
     add_user();
@@ -232,7 +231,6 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_start_iter(passwordBuffer, &start2);
     gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
     gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
-    g_print("%s %s\n", user, passwords);
     password = passwords;
     
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
@@ -264,11 +262,10 @@ void newRoom_clicked (GtkWidget *widget, gpointer data) {
     gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
 
     RName = name;
-    printf ("%s %s %s", user, password, RName);
-    update_list_rooms();
 
     add_room();
 
+    update_list_rooms();
     gtk_widget_destroy(GTK_WIDGET(CreateRoomwindow));
 }
 void create_clicked (GtkWidget *widget, gpointer data) {
