@@ -152,7 +152,7 @@ void get_rooms() {
 
             j = 0;
             RoomNumber++;
-            printf("%s\n", RoomName[0]);
+            printf("%s\n", RoomName[RoomNumber - 1]);
         }
         i++;
         j++;
