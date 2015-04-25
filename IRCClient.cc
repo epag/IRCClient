@@ -195,9 +195,9 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start2, end2;
     gtk_text_buffer_get_start_iter(passwordBuffer, &start2);
     gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
-    gchar* password = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
-    g_print("%s %s\n", name, password);
-    password = password;
+    gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
+    g_print("%s %s\n", name, passwords);
+    password = passwords;
 
     add_user();
 
@@ -215,9 +215,9 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start2, end2;
     gtk_text_buffer_get_start_iter(passwordBuffer, &start2);
     gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
-    gchar* password = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
-    g_print("%s %s\n", name, password);
-    password = password;
+    gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
+    g_print("%s %s\n", name, passwords);
+    password = passwords;
     
     add_user();
 
