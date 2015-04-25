@@ -153,12 +153,13 @@ void get_rooms() {
             //RoomName[RoomNumber][k] = '\0';
             j = 0;
             RoomNumber++;
+            printf("%s\n", RoomName[1]);
         }
         i++;
         j++;
     }
     
-        printf("%s\n", RoomName[1]);
+
 }
 
 // GUI FUNCTIONS
