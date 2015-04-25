@@ -342,7 +342,7 @@ void add_user() {
     sendCommand (host, port, "ADD-USER", user, password, "", responce);
 
     if (!strcmp (responce, "OK\r\n")) {
-        printf ("User %s added\n");
+        printf ("User %s added\n", user);
     }
 }
 
