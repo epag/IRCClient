@@ -132,6 +132,25 @@ void add_room() {
     }
 }
 
+void get_rooms() {
+    char responce [MAX_RESPONCE];
+
+    sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
+    
+    int i;
+    int j;
+
+    while (responce[i] != '\0') {
+        if (responce[i] == '*') {
+            RoomName[RoomNumber] = &responce[i-j];
+            responce[i] = '\0';
+            j = 0;
+            RoomNumber++;
+        }
+        i++;
+        j++;
+    }
+}
 
 // GUI FUNCTIONS
 
