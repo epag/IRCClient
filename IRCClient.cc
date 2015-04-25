@@ -140,11 +140,15 @@ void get_rooms() {
     
     int i = 1;
     int j;
+    int k;
     
     while (responce[i] != '\0') {
         if (responce[i] == '*') {
-            responce[i] = '\0';
-            RoomName[RoomNumber] = &responce[i];
+            k = i - j;
+            while (responce[k] != '*') {
+            *(RoomName[RoomNumber] + k) = responce[k];
+            k++;
+            }
             j = 0;
             RoomNumber++;
         }
