@@ -34,6 +34,7 @@ char * user;
 char * password;
 char * sport;
 int port;
+char * RName;
 
 #define MAX_MESSAGES 100
 #define MAX_MESSAGE_LEN 300
@@ -120,6 +121,19 @@ void add_user() {
         printf ("User %s added\n", user);
     }
 }
+
+void add_room() {
+    char responce [MAX_RESPONCE];
+ 
+    sendCommand (host, port, "CREATE-ROOM", user, password, RName, responce);
+
+    if (!strcmp(responce, "OK\r\n")) {
+        printf ("Room %s created\n", RName);
+    }
+}
+
+
+// GUI FUNCTIONS
 
 void update_list_rooms() {
     GtkTreeIter iter;
@@ -248,8 +262,8 @@ void newRoom_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
     gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
-    RoomName[RoomNumber] = name;
-    RoomNumber++;
+
+    RName = name;
 
     update_list_rooms();
 
