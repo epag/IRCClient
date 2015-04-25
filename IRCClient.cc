@@ -147,6 +147,8 @@ void get_rooms() {
             k = i - j;
             while (responce[k] != '*') {
             RoomName[RoomNumber][k] = responce[k];
+
+            printf("%c %c\n", RoomName[RoomNumber][k], responce[k]);
             k++;
             }
             RoomName[RoomNumber][k] = '\0';
