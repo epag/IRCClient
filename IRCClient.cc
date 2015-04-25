@@ -149,6 +149,7 @@ void get_rooms() {
             RoomName[RoomNumber][k] = responce[k];
             k++;
             }
+            RoomName[RoomNumber][k] = '\0';
             j = 0;
             RoomNumber++;
         }
