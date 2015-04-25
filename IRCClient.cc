@@ -251,6 +251,7 @@ void newRoom_clicked (GtkWidget *widget, gpointer data) {
     RoomName[RoomNumber] = name;
     RoomNumber++;
 
+    update_list_rooms();
 
     gtk_widget_destroy(GTK_WIDGET(CreateRoomwindow));
 }
