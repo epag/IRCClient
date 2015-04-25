@@ -25,6 +25,7 @@ char * user_name;
 char * user_password;
 char * sentMessage;
 char * RoomName[100];
+int RoomNumber = 0;
 
 // CLIENT VARIABLES
 
@@ -125,7 +126,7 @@ void update_list_rooms() {
     int i;
 
     /* Add some messages to the window */
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < RoomNumber; i++) {
         gchar *msg = g_strdup_printf ("%s", RoomName[i]);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
         gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
@@ -247,19 +248,11 @@ void newRoom_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
     gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
-    user = name;
-
-    GtkTextIter start2, end2;
-    gtk_text_buffer_get_start_iter(passwordBuffer, &start2);
-    gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
-    gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
-    g_print("%s %s\n", name, passwords);
-    password = passwords;
-
-    add_user();
+    RoomName[RoomNumber] = name;
+    RoomNumber++;
 
 
-    gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
+    gtk_widget_destroy(GTK_WIDGET(CreateRoomwindow));
 }
 void create_clicked (GtkWidget *widget, gpointer data) {
     GtkWidget *list;
