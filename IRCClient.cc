@@ -158,6 +158,7 @@ void get_rooms() {
         }
         i++;
         j++;
+        printf("%s\n", RoomName[RoomNumber]);
     }
 }
 
