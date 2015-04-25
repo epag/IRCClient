@@ -267,6 +267,8 @@ void newRoom_clicked (GtkWidget *widget, gpointer data) {
 
     update_list_rooms();
 
+    add_room();
+
     gtk_widget_destroy(GTK_WIDGET(CreateRoomwindow));
 }
 void create_clicked (GtkWidget *widget, gpointer data) {

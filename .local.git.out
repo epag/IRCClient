@@ -334,3 +334,5 @@
  4 files changed, 18 insertions(+), 2 deletions(-)
  create mode 100644 .talk-client.c.swp
  rewrite IRCClient (72%)
+[master 5b5841c] Make IRCclient
+ 1 file changed, 4 insertions(+)
