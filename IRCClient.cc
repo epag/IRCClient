@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <gtk/gtk.h>
+#include <time.h>
+#include <curses.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <pthread.h>
+
 
 GtkWidget *table;
 GtkWidget *messages;
@@ -15,6 +23,21 @@ GtkWidget *LogOnwindow;
 char * user_name;
 char * user_password;
 char * sentMessage;
+
+
+// CLIENT VARIABLES
+
+char * host;
+char * user;
+char * password;
+char * sport;
+int port;
+
+#define MAX_MESSAGES 100
+#define MAX_MESSAGE_LEN 300
+#define MAX_RESPONCE (20 * 1024)
+
+int lastMessage = 0;
 
 void update_list_rooms() {
     GtkTreeIter iter;
@@ -238,9 +261,115 @@ void log_clicked (GtkWidget *widget, gpointer data) {
 
     return;
 }
+
+
+
+
+
+// CLIENT CODE
+
+
+int open_client_socket (char * host, int port) {
+    
+    struct sockaddr_in socketAddress;
+
+    memset ((char *) &socketAddress, 0, sizeof(socketAddress));
+
+    socketAddress.sin_family = AF_INET;
+
+    socketAddress.sin_port = htons ((u_short) port);
+
+    struct hostent * ptrh = gethostbyname(host);
+
+    if (ptrh == NULL) {
+        perror ("gethostbyname");
+        exit(1);
+    }
+
+    memcpy (&socketAddress.sin_addr, ptrh->h_addr, ptrh->h_length);
+
+    struct protoent * ptrp = getprotobyname("tcp");
+
+    if (ptrp == NULL) {
+        perror ("getprotobyname");
+        exit(1);
+    }
+
+    int sock = socket (PF_INET, SOCK_STREAM, ptrp->p_proto);
+    if (sock < 0) {
+        perror ("socket");
+        exit(1);
+    }
+
+    if (connect(sock, (struct sockaddr *) &socketAddress, sizeof(socketAddress)) < 0) {
+        perror ("connect");
+        exit(1);
+    }
+
+    return sock;
+
+}
+
+
+
+int sendCommand (char * host, int port, char * command, char * user, char * password, char * args, char * responce) {
+
+    int sock = open_client_socket (host, port);
+
+    write (sock, command, strlen(command));
+    write (sock, " ", 1);
+    write (sock, user, strlen(user));
+    write (sock, " ", 1);
+    write (sock, password, strlen(password));
+    write (sock, " ", 1);
+    write (sock, args, strlen(args));
+    write (sock, "\r\n", 2);
+
+    int n = 0;
+    int len = 0;
+
+    while ((n=read(sock, responce+len, MAX_RESPONCE - len)) > 0) {
+        len += n;
+    }
+
+    close (sock);
+
+}
+
+
+void add_user() {
+    char responce [MAX_RESPONCE];
+    sendCommand (host, port, "ADD-USER", user, password, "", responce);
+
+    if (!strcmp (responce, "OK\r\n")) {
+        printf ("User %s added\n");
+    }
+}
+
+
+
+
 int main( int   argc,
           char *argv[] )
 {
+
+    //SERVER CODE
+    
+    char line[MAX_MESSAGE_LEN+1];
+    
+    host = argv[1];
+    sport = argv[2];
+    user = argv[3];
+    password = argv[4];
+
+    sscanf(sport, "%d", &port);
+
+    add_user();
+
+
+
+
+    // GUI CODE
     sentMessage = (char *) malloc(sizeof(char) * 100000000);
     GtkWidget *window;
     GtkWidget *list;
