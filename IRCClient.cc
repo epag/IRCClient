@@ -269,7 +269,7 @@ void create_clicked (GtkWidget *widget, gpointer data) {
     gtk_widget_set_size_request (GTK_WIDGET (LogOnwindow), 250, 100);
 
     // Create a table to place the widgets. Use a 7x4 Grid (7 rows x 4 columns)
-    GtkWidget *table = gtk_table_new (2, 3, TRUE);
+    GtkWidget *table = gtk_table_new (2, 5, TRUE);
     gtk_container_add (GTK_CONTAINER (CreateRoomwindow), table);
     gtk_table_set_row_spacings(GTK_TABLE (table), 5);
     gtk_table_set_col_spacings(GTK_TABLE (table), 5);
@@ -279,12 +279,12 @@ void create_clicked (GtkWidget *widget, gpointer data) {
     name = gtk_text_view_new ();
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (name));
     gtk_text_buffer_set_text (buffer, "RoomName", -1);
-    gtk_table_attach_defaults (GTK_TABLE (table), name, 0, 4, 0, 1);
+    gtk_table_attach_defaults (GTK_TABLE (table), name, 1, 5, 0, 1);
     gtk_widget_show(name);
     
     // Create room button
     GtkWidget *newRoom_button = gtk_button_new_with_label ("Create Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), newRoom_button, 0, 4, 1, 2); 
+    gtk_table_attach_defaults(GTK_TABLE (table), newRoom_button, 1, 5, 1, 2); 
     gtk_widget_show (newRoom_button);
     
     gtk_widget_show (table);
