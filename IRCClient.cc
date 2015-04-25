@@ -57,10 +57,31 @@ static GtkWidget *create_text( const char * initialText )
    insert_text (chatLog, initialText);
 
    gtk_widget_show_all (scrolled_window);
+   gtk_text_view_set_editable(GTK_TEXT_VIEW (view), false);
 
    return scrolled_window;
 }
 
+static GtkWidget *create_text2( const char * initialText )
+{
+   GtkWidget *scrolled_window;
+   GtkWidget *view;
+
+   view = gtk_text_view_new ();
+   messageBuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+
+   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+		   	           GTK_POLICY_AUTOMATIC,
+				   GTK_POLICY_ALWAYS);
+
+   gtk_container_add (GTK_CONTAINER (scrolled_window), view);
+   insert_text (messageBuffer, initialText);
+
+   gtk_widget_show_all (scrolled_window);
+
+   return scrolled_window;
+}
 void newUsr_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start, end;
     gtk_text_buffer_get_start_iter(buffer, &start);
@@ -263,9 +284,9 @@ int main( int   argc,
 
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
-    messages = create_text ("");
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 5, 7);
-    gtk_widget_show (messages);
+    myMessage = create_text2 ("");
+    gtk_table_attach_defaults (GTK_TABLE (table), myMessage, 0, 4, 5, 7);
+    gtk_widget_show (myMessage);
 
     // Create room button
     GtkWidget *create_button = gtk_button_new_with_label ("Create Room");
