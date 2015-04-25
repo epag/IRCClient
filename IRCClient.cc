@@ -134,15 +134,18 @@ void add_room() {
 
 void get_rooms() {
     char responce [MAX_RESPONCE];
+    RoomNumber = 0;
 
     sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
     
-    int i;
+    int i = 1;
     int j;
+    
+    
 
     while (responce[i] != '\0') {
         if (responce[i] == '*') {
-            RoomName[RoomNumber] = &responce[i-j];
+            RoomName[RoomNumber] = &responce[i-j + 1];
             responce[i] = '\0';
             j = 0;
             RoomNumber++;
