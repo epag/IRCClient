@@ -139,7 +139,7 @@ void get_rooms() {
     sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
     
     int i = 1;
-    int j;
+    int j = 0;
     int k;
     
     while (responce[i] != '\0') {
