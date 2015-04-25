@@ -24,7 +24,7 @@ GtkWidget * CreateRoomwindow;
 char * user_name;
 char * user_password;
 char * sentMessage;
-char RoomName[100][100];
+char * RoomName[100];
 int RoomNumber = 0;
 
 // CLIENT VARIABLES
@@ -139,6 +139,7 @@ void get_rooms() {
     sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
     
     //printf ("%s", responce);
+
     int i = 1;
     int j = 0;
     int k;
@@ -146,11 +147,9 @@ void get_rooms() {
     while (responce[i] != '\0') {
         if (responce[i] == '*') {
             k = i - j;
-            while (responce[k] != '*') {
-            RoomName[RoomNumber][k] = responce[k];
-            k++;
-            }
-            //RoomName[RoomNumber][k] = '\0';
+            RoomName[RoomNumber][k] = '\0';
+            RoomName[RoomNumber] = &responce[k];
+
             j = 0;
             RoomNumber++;
             printf("%s\n", RoomName[0]);
