@@ -143,7 +143,7 @@ void get_rooms() {
     
     while (responce[i] != '\0') {
         if (responce[i] == '*') {
-            RoomName[RoomNumber] = &responce[i-j];
+            RoomName[RoomNumber] = &responce[i];
             responce[i] = '\0';
             j = 0;
             RoomNumber++;
