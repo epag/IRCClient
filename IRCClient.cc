@@ -363,12 +363,10 @@ int main( int   argc,
     
     host = argv[1];
     sport = argv[2];
-    user = argv[3];
-    password = argv[4];
 
     sscanf(sport, "%d", &port);
 
-
+    printf ("\nStrarting talk-client %s %s \n", host, sport);
 
 
 
