@@ -279,12 +279,12 @@ void create_clicked (GtkWidget *widget, gpointer data) {
     name = gtk_text_view_new ();
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (name));
     gtk_text_buffer_set_text (buffer, "RoomName", -1);
-    gtk_table_attach_defaults (GTK_TABLE (table), name, 0, 2, 0, 1);
+    gtk_table_attach_defaults (GTK_TABLE (table), name, 0, 3, 0, 1);
     gtk_widget_show(name);
     
     // Create room button
     GtkWidget *newRoom_button = gtk_button_new_with_label ("Create Room");
-    gtk_table_attach_defaults(GTK_TABLE (table), newRoom_button, 0, 2, 1, 2); 
+    gtk_table_attach_defaults(GTK_TABLE (table), newRoom_button, 0, 3, 1, 2); 
     gtk_widget_show (newRoom_button);
     
     gtk_widget_show (table);
