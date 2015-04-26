@@ -363,6 +363,49 @@ void send_clicked (GtkWidget *widget, gpointer data) {
 
     gtk_text_buffer_set_text (messageBuffer, "", -1);
 }
+void update_list_users (GtkWidget *widget, gpointer data) {
+    GtkWidget *users;
+
+
+    GValue tempVal = G_VALUE_INIT;
+    GtkWidget * treeCpy = tree_view;
+    GtkTreeSelection * roomSelected = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
+    GtkListStore * model = list_rooms;
+    GtkTreeModel * treeModel = GTK_TREE_MODEL (model);
+    GList * info = gtk_tree_selection_get_selected_rows (roomSelected, &treeModel);
+    GtkTreePath * treePath = (GtkTreePath*) info->data;
+    GtkTreeIter * iter = (GtkTreeIter *) malloc (sizeof(GtkTreeIter));
+    gtk_tree_model_get_iter (treeModel, iter, treePath);    
+    gtk_tree_model_get_value (treeModel, iter, 0, &tempVal);
+    const GValue * GStore = (const GValue *) &tempVal;
+    selectedRoom = g_strdup (g_value_get_string (GStore));
+    printf("Selected %s\n", selectedRoom);
+
+
+
+    char responce [MAX_RESPONCE];
+
+    sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
+    peopleNumber = 0; 
+    int i = 0;
+
+    char * token;
+    token = strtok(responce, "*");
+
+    for (int j; j < 100; j++) {
+        people[j] = NULL;
+    }
+
+    while (token != NULL) { 
+
+        people[i] = strdup(token);
+        token = strtok(NULL, "*");
+        i++;
+        peopleNumber++;
+    }
+
+    update_users();
+}
 
 void join_clicked (GtkWidget *widget, gpointer data) {
     for (int i = 0; i < peopleNumber; i++) {
@@ -573,49 +616,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     return;
 }
 
-void update_list_users (GtkWidget *widget, gpointer data) {
-    GtkWidget *users;
 
-
-    GValue tempVal = G_VALUE_INIT;
-    GtkWidget * treeCpy = tree_view;
-    GtkTreeSelection * roomSelected = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
-    GtkListStore * model = list_rooms;
-    GtkTreeModel * treeModel = GTK_TREE_MODEL (model);
-    GList * info = gtk_tree_selection_get_selected_rows (roomSelected, &treeModel);
-    GtkTreePath * treePath = (GtkTreePath*) info->data;
-    GtkTreeIter * iter = (GtkTreeIter *) malloc (sizeof(GtkTreeIter));
-    gtk_tree_model_get_iter (treeModel, iter, treePath);    
-    gtk_tree_model_get_value (treeModel, iter, 0, &tempVal);
-    const GValue * GStore = (const GValue *) &tempVal;
-    selectedRoom = g_strdup (g_value_get_string (GStore));
-    printf("Selected %s\n", selectedRoom);
-
-
-
-    char responce [MAX_RESPONCE];
-
-    sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
-    peopleNumber = 0; 
-    int i = 0;
-
-    char * token;
-    token = strtok(responce, "*");
-
-    for (int j; j < 100; j++) {
-        people[j] = NULL;
-    }
-
-    while (token != NULL) { 
-
-        people[i] = strdup(token);
-        token = strtok(NULL, "*");
-        i++;
-        peopleNumber++;
-    }
-
-    update_users();
-}
 
 
 
