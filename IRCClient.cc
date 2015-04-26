@@ -35,6 +35,8 @@ char * password;
 char * sport;
 int port;
 char * RName;
+int inList = 0;
+
 
 #define MAX_MESSAGES 100
 #define MAX_MESSAGE_LEN 300
@@ -140,7 +142,6 @@ void get_rooms() {
     int i = 0;
 
     char * token;
-    printf ("%s", responce);
     token = strtok(responce, "*");
 
     while (token != NULL) { 
@@ -157,12 +158,11 @@ void get_rooms() {
 
 void update_list_rooms() {
     GtkTreeIter iter;
-    int i;
+
 
     /* Add some messages to the window */
-    for (i = 0; i < RoomNumber; i++) {
-        gchar * msg = g_strdup_printf ("%s", RoomName[i]);
-        printf("%s", msg);
+    for (; inList < RoomNumber; inList++) {
+        gchar * msg = g_strdup_printf ("%s", RoomName[inList]);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
         gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
         free(msg);
