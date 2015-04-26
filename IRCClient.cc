@@ -160,7 +160,7 @@ void update_list_rooms() {
     int i;
 
     /* Add some messages to the window */
-    for (i = 0; i < RoomNumber; i++) {
+    for (i = 1; i < RoomNumber; i++) {
         gchar * msg = RoomName[i];
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
         gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
