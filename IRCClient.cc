@@ -27,6 +27,7 @@ char * sentMessage;
 char * RoomName[100];
 int RoomNumber = 0;
 GtkWidget *tree_view;
+GtkWidget *tree_view2;
 
 // CLIENT VARIABLES
 
@@ -379,6 +380,42 @@ static GtkWidget *create_list( const char * titleColumn, GtkListStore *model )
     return scrolled_window;
 }
    
+static GtkWidget *create_list2( const char * titleColumn, GtkListStore *model )
+{
+    GtkWidget *scrolled_window;
+
+    //GtkListStore *model;
+    GtkCellRenderer *cell;
+    GtkTreeViewColumn *column;
+
+
+
+    int i;
+   
+    /* Create a new scrolled window, with scrollbars only if needed */
+    scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+				    GTK_POLICY_AUTOMATIC, 
+				    GTK_POLICY_AUTOMATIC);
+   
+    //model = gtk_list_store_new (1, G_TYPE_STRING);
+    tree_view2 = gtk_tree_view_new ();
+    gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view2);
+    gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view2), GTK_TREE_MODEL (model));
+    gtk_widget_show (tree_view2);
+   
+    cell = gtk_cell_renderer_text_new ();
+
+    column = gtk_tree_view_column_new_with_attributes (titleColumn,
+                                                       cell,
+                                                       "text", 0,
+                                                       NULL);
+  
+    gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view2),
+	  		         GTK_TREE_VIEW_COLUMN (column));
+
+    return scrolled_window;
+}
 /* Add some text to our text widget - this is a callback that is invoked
 when our window is realized. We could also force our window to be
 realized with gtk_widget_realize, but it would have to be part of
@@ -510,11 +547,11 @@ int main( int   argc,
     gtk_widget_show (messages);
 
     // Add list of Users.
-/*    users_list = gtk_list_store_new (1, G_TYPE_STRING);
-    users = create_list ("Users", users_list);
+    users_list = gtk_list_store_new (1, G_TYPE_STRING);
+    users = create_list2 ("Users", users_list);
     gtk_table_attach_defaults (GTK_TABLE (table), users, 0, 2, 0, 2);
     gtk_widget_show (users);
-*/
+
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
     myMessage = create_text2 ("");
