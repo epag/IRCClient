@@ -26,7 +26,7 @@ char * user_password;
 char * sentMessage;
 char * RoomName[100];
 int RoomNumber = 0;
-GtkWidget *list;
+GtkWidget *tree_view;
 
 // CLIENT VARIABLES
 
@@ -274,13 +274,8 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     messages = create_text(sentMessage);
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
-    int wx, wy;
-    int * x;
-    int * y;
 
-    gtk_tree_view_convert_widget_to_tree_coords(GTK_TREE_VIEW (list), wx, wy, x, y);
 
-    printf("%d %d %d %d", *x, *y, wx, wy);
     gtk_text_buffer_set_text (messageBuffer, "", -1);
 }
 
@@ -350,10 +345,12 @@ void create_clicked (GtkWidget *widget, gpointer data) {
 static GtkWidget *create_list( const char * titleColumn, GtkListStore *model )
 {
     GtkWidget *scrolled_window;
-    GtkWidget *tree_view;
+
     //GtkListStore *model;
     GtkCellRenderer *cell;
     GtkTreeViewColumn *column;
+
+
 
     int i;
    
@@ -447,7 +444,9 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     return;
 }
 
-
+void update_list_users (GtkWidget *widget, gpointer data) {
+    printf("UPDATED\n");
+}
 
 
 
@@ -481,6 +480,7 @@ int main( int   argc,
     GtkWidget *myMessage;
     GtkWidget *users;
 
+    GtkWidget *list;
     gtk_init (&argc, &argv);
    
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -543,7 +543,7 @@ int main( int   argc,
  
 
 
-
+    g_signal_connect (tree_view, "row-activated", G_CALLBACK(update_list_users), NULL);
     g_signal_connect (G_OBJECT(send_button), "clicked", G_CALLBACK(send_clicked), NULL);
     g_signal_connect (G_OBJECT(leave_button), "clicked", G_CALLBACK(join_clicked), NULL);
     g_signal_connect (G_OBJECT(create_button), "clicked", G_CALLBACK(create_clicked), NULL);
