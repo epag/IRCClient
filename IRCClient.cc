@@ -25,6 +25,8 @@ char * user_name;
 char * user_password;
 char * sentMessage;
 char * RoomName[100];
+char * people[100];
+int peopleNumber = 0;
 int RoomNumber = 0;
 GtkWidget *tree_view;
 GtkWidget *tree_view2;
@@ -132,7 +134,7 @@ void add_room() {
     sendCommand (host, port, "CREATE-ROOM", user, password, RName, responce);
 
     if (!strcmp(responce, "OK\r\n")) {
-        printf ("Room %s created", RName);
+        printf ("Room %s created\n", RName);
     }
 }
 
@@ -153,7 +155,25 @@ void get_rooms() {
         i++;
         RoomNumber++;
     }
+}
 
+void get_all_users() {
+    char responce [MAX_RESPONCE];
+    
+    sendCommand (host, port, "GET-ALL-USERS", user, password, "", responce);
+    peopleNumber = 0; 
+    int i = 0;
+
+    char * token;
+    token = strtok(responce, "*");
+
+    while (token != NULL) { 
+ 
+        people[i] = strdup(token);
+        token = strtok(NULL, "*");
+        i++;
+        peopleNumber++;
+    }
 }
 
 
