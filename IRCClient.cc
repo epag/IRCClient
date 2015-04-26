@@ -260,16 +260,21 @@ void get_all_users() {
 
 void update_list_rooms() {
     GtkTreeIter iter;
+    gtk_list_store_clear (GTK_LIST_STORE (list_rooms));
 
-
+    if (!strcmp(RoomName[0], "empty")) {
+        gtk_list_store_clear (GTK_LIST_STORE (list_rooms));
+        return;
+    }
     /* Add some messages to the window */
-    for (; inList < RoomNumber; inList++) {
-        gchar * msg = g_strdup_printf ("%s", RoomName[inList]);
+    for (int i = 0; i < RoomNumber; i++) {
+        gchar * msg = g_strdup_printf ("%s", RoomName[i]);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
         gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
         free(msg);
     }
 }
+
 void update_users() {
     GtkTreeIter iter;
     gtk_list_store_clear (GTK_LIST_STORE (users_list));
