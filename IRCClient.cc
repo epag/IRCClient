@@ -426,7 +426,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
  
     gtk_widget_show (table);
     gtk_widget_show (LogOnwindow);
-    update_list_rooms();
+
     g_signal_connect (G_OBJECT(logOn_button), "clicked", G_CALLBACK(logOn_clicked), NULL);
     g_signal_connect (G_OBJECT(newUsr_button), "clicked", G_CALLBACK(newUsr_clicked), NULL);
     gtk_main ();
@@ -528,6 +528,9 @@ int main( int   argc,
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 3, 4, 7, 8);
     gtk_widget_show (send_button);
  
+
+
+
     g_signal_connect (G_OBJECT(send_button), "clicked", G_CALLBACK(send_clicked), NULL);
     g_signal_connect (G_OBJECT(leave_button), "clicked", G_CALLBACK(join_clicked), NULL);
     g_signal_connect (G_OBJECT(create_button), "clicked", G_CALLBACK(create_clicked), NULL);
@@ -535,6 +538,7 @@ int main( int   argc,
     gtk_widget_show (table);
     gtk_widget_show (window);
 
+    update_list_rooms();
     gtk_main ();
 
     return 0;
