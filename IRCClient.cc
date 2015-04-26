@@ -155,6 +155,9 @@ void get_rooms() {
     RoomNumber = 0; 
     int i = 0;
 
+    for (int j; j < 100; j++) {
+        people[j] = NULL;
+    }
     char * token;
     token = strtok(responce, "*");
 
