@@ -543,7 +543,7 @@ int main( int   argc,
  
 
 
-    g_signal_connect (list, "cursor-changed", G_CALLBACK(update_list_users), NULL);
+    g_signal_connect (list_rooms, "cursor-changed", G_CALLBACK(update_list_users), NULL);
     g_signal_connect (G_OBJECT(send_button), "clicked", G_CALLBACK(send_clicked), NULL);
     g_signal_connect (G_OBJECT(leave_button), "clicked", G_CALLBACK(join_clicked), NULL);
     g_signal_connect (G_OBJECT(create_button), "clicked", G_CALLBACK(create_clicked), NULL);
