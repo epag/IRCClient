@@ -483,6 +483,9 @@ void log_clicked (GtkWidget *widget, gpointer data) {
 
 void update_list_users (GtkWidget *widget, gpointer data) {
     GtkTreeSelection * answer = gtk_tree_view_get_selection (GTK_TREE_VIEW(tree_view));
+    GtkTreeModel ** model;
+    * model = gtk_tree_view_get_model(GTK_TREE_VIEW(tree_view));
+    GList * asnwer2 = gtk_tree_selection_get_selected_rows (answer, model);
     printf("UPDATED\n");
 }
 
