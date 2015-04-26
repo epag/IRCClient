@@ -213,7 +213,7 @@ void get_rooms() {
     char responce [MAX_RESPONCE];
 
     sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
-    inLine = 0; 
+    RoomNumber = 0; 
     int i = 0;
 
     char * token;
