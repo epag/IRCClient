@@ -216,7 +216,7 @@ void get_rooms() {
     RoomNumber = 0; 
     int i = 0;
 
-    for (int j; j < 100; j++) {
+    for (int j = 0; j < 100; j++) {
         RoomName[j] = NULL;
     }
     char * token;
@@ -241,7 +241,7 @@ void get_all_users() {
     char * token;
     token = strtok(responce, "*");
 
-    for (int j; j < 100; j++) {
+    for (int j = 0; j < 100; j++) {
         people[j] = NULL;
     }
     while (token != NULL) { 
