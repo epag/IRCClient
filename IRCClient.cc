@@ -426,7 +426,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
  
     gtk_widget_show (table);
     gtk_widget_show (LogOnwindow);
-
+    update_list_rooms();
     g_signal_connect (G_OBJECT(logOn_button), "clicked", G_CALLBACK(logOn_clicked), NULL);
     g_signal_connect (G_OBJECT(newUsr_button), "clicked", G_CALLBACK(newUsr_clicked), NULL);
     gtk_main ();
