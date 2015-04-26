@@ -140,6 +140,7 @@ void get_rooms() {
     int i = 0;
 
     char * token;
+    printf ("%s", responce);
     token = strtok(responce, "*");
 
     while (token != NULL) { 
