@@ -160,11 +160,15 @@ void enter_room () {
 
 
     if (!strcmp(responce, "OK\r\n")) {
-        gchar * msg = g_strdup_printf ("You joined %s", selectedRoom);
-        messages = create_text(msg); 
+        GtkTextIter start, end;
+        gtk_text_buffer_get_start_iter(messageBuffer, &start);
+        gtk_text_buffer_get_end_iter(messageBuffer, &end);
+        gchar * msg = g_strdup_printf ("You left %s", selectedRoom);
+        strcat(sentMessage, msg);
+        sprintf(sentMessage, "%s\n", sentMessage),
+        messages = create_text(sentMessage);
         gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
         gtk_widget_show (messages);
-        free(msg);
     }
 }
 void leave_room () {
@@ -175,15 +179,15 @@ void leave_room () {
 
 
     if (!strcmp(responce, "OK\r\n")) {
-    GtkTextIter start, end;
-    gtk_text_buffer_get_start_iter(messageBuffer, &start);
-    gtk_text_buffer_get_end_iter(messageBuffer, &end);
-    gchar * msg = g_strdup_printf ("You left %s", selectedRoom);
-    strcat(sentMessage, msg);
-    sprintf(sentMessage, "%s\n", sentMessage),
-    messages = create_text(sentMessage);
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
-    gtk_widget_show (messages);
+        GtkTextIter start, end;
+        gtk_text_buffer_get_start_iter(messageBuffer, &start);
+        gtk_text_buffer_get_end_iter(messageBuffer, &end);
+        gchar * msg = g_strdup_printf ("You left %s", selectedRoom);
+        strcat(sentMessage, msg);
+        sprintf(sentMessage, "%s\n", sentMessage),
+        messages = create_text(sentMessage);
+        gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+        gtk_widget_show (messages);
     }
 }
 
