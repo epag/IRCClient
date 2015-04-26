@@ -554,7 +554,7 @@ void update_list_users (GtkWidget *widget, gpointer data) {
     int i = 0;
 
     char * token;
-    token = strtok(responce, "*");
+    token = strtok(responce, "\n");
     
     for (int j; j < 100; j++) {
         people[j] = NULL;
@@ -563,7 +563,7 @@ void update_list_users (GtkWidget *widget, gpointer data) {
     while (token != NULL) { 
  
         people[i] = strdup(token);
-        token = strtok(NULL, "*");
+        token = strtok(NULL, "\n");
         i++;
         peopleNumber++;
     }
