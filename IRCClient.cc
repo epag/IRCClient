@@ -192,6 +192,18 @@ void update_list_rooms() {
         free(msg);
     }
 }
+void update_users() {
+    GtkTreeIter iter;
+
+
+    /* Add some messages to the window */
+    for (int i = 0; i < peopleNumber; inList++) {
+        gchar * msg = g_strdup_printf ("%s", people[i]);
+        gtk_list_store_append (GTK_LIST_STORE (users_list), &iter);
+        gtk_list_store_set (GTK_LIST_STORE (users_list), &iter, 0, msg,-1);
+        free(msg);
+    }
+}
 
 
 static void insert_text( GtkTextBuffer *buffer, const char * initialText )
@@ -580,6 +592,7 @@ int main( int   argc,
 
     // Add list of Users.
     users_list = gtk_list_store_new (1, G_TYPE_STRING);
+    update_users();
     users = create_list2 ("Users", users_list);
     gtk_table_attach_defaults (GTK_TABLE (table), users, 0, 2, 0, 2);
     gtk_widget_show (users);
