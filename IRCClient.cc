@@ -26,6 +26,7 @@ char * user_password;
 char * sentMessage;
 char * RoomName[100];
 int RoomNumber = 0;
+GtkWidget *list;
 
 // CLIENT VARIABLES
 
@@ -154,6 +155,8 @@ void get_rooms() {
 
 }
 
+
+
 // GUI FUNCTIONS
 
 void update_list_rooms() {
@@ -271,7 +274,13 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     messages = create_text(sentMessage);
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
+    int wx, wy;
+    int * x;
+    int * y;
 
+    gtk_tree_view_convert_widget_to_tree_coords(GTK_TREE_VIEW (list), wx, wy, x, y);
+
+    printf("%d %d %d %d", *x, *y, wx, wy);
     gtk_text_buffer_set_text (messageBuffer, "", -1);
 }
 
@@ -467,7 +476,7 @@ int main( int   argc,
     // GUI CODE
     sentMessage = (char *) malloc(sizeof(char) * 100000000);
     GtkWidget *window;
-    GtkWidget *list;
+
 
     GtkWidget *myMessage;
     GtkWidget *users;
