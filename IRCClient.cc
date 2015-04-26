@@ -339,6 +339,7 @@ void join_clicked (GtkWidget *widget, gpointer data) {
 
 void newRoom_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start, end;
+    buffer = NULL;
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
     gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
