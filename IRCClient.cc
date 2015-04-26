@@ -210,7 +210,7 @@ void update_list_rooms() {
 }
 void update_users() {
     GtkTreeIter iter;
-
+    gtk_list_store_clear (GTK_LIST_STORE (users_list));
 
     /* Add some messages to the window */
     for (int i = 0; i < peopleNumber; i++) {
@@ -574,11 +574,7 @@ void update_list_users (GtkWidget *widget, gpointer data) {
         peopleNumber++;
     }
 
-    users_list = gtk_list_store_new (1, G_TYPE_STRING);
-    users = create_list2 ("Users", users_list);
-    gtk_table_attach_defaults (GTK_TABLE (table), users, 0, 2, 0, 2);
     update_users();
-    gtk_widget_show (users);
 }
 
 
