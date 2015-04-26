@@ -368,53 +368,11 @@ void join_clicked (GtkWidget *widget, gpointer data) {
     for (int i = 0; i < peopleNumber; i++) {
         if (!strcmp(user, people[i])) {
             leave_room();
-            char responce [MAX_RESPONCE];
-
-            sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
-            peopleNumber = 0; 
-            int i = 0;
-
-            char * token;
-            token = strtok(responce, "*");
-
-            for (int j; j < 100; j++) {
-                people[j] = NULL;
-            }
-
-            while (token != NULL) { 
-
-                people[i] = strdup(token);
-                token = strtok(NULL, "*");
-                i++;
-                peopleNumber++;
-            }
-
-
             update_users();
             return;
         }
     }
-            char responce [MAX_RESPONCE];
-
-            sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
-            peopleNumber = 0; 
-            int i = 0;
-
-            char * token;
-            token = strtok(responce, "*");
-
-            for (int j; j < 100; j++) {
-                people[j] = NULL;
-            }
-
-            while (token != NULL) { 
-
-                people[i] = strdup(token);
-                token = strtok(NULL, "*");
-                i++;
-                peopleNumber++;
-            }
-
+    enter_room();
     update_users();
 }
 
