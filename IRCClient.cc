@@ -528,6 +528,9 @@ void log_clicked (GtkWidget *widget, gpointer data) {
 }
 
 void update_list_users (GtkWidget *widget, gpointer data) {
+    GtkWidget *users;
+
+
     GValue tempVal = G_VALUE_INIT;
     GtkWidget * treeCpy = tree_view;
     GtkTreeSelection * roomSelected = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
@@ -541,6 +544,31 @@ void update_list_users (GtkWidget *widget, gpointer data) {
     const GValue * GStore = (const GValue *) &tempVal;
     selectedRoom = g_strdup (g_value_get_string (GStore));
     printf("Selected %s\n", selectedRoom);
+    
+
+
+    char responce [MAX_RESPONCE];
+    
+    sendCommand (host, port, "GET-ALL-USERS-IN-ROOM", user, password, selectedRoom, responce);
+    peopleNumber = 0; 
+    int i = 0;
+
+    char * token;
+    token = strtok(responce, "*");
+
+    while (token != NULL) { 
+ 
+        people[i] = strdup(token);
+        token = strtok(NULL, "*");
+        i++;
+        peopleNumber++;
+    }
+
+    users_list = gtk_list_store_new (1, G_TYPE_STRING);
+    users = create_list2 ("Users", users_list);
+    gtk_table_attach_defaults (GTK_TABLE (table), users, 0, 2, 0, 2);
+    update_users();
+    gtk_widget_show (users);
 }
 
 
