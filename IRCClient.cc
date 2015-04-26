@@ -350,6 +350,9 @@ void join_clicked (GtkWidget *widget, gpointer data) {
     for (int i = 0; i < peopleNumber; i++) {
         if (!strcmp(user, people[i])) {
             leave_room();
+            messages = create_text("You left the room\n");
+            gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+            gtk_widget_show (messages);
             return;
         }
     }
