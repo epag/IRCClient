@@ -274,7 +274,8 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     add_user();
     get_rooms();
     update_list_rooms();
-
+    get_all_users(); 
+    update_users();
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
 
@@ -291,6 +292,8 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     password = passwords;
     
+    get_all_users(); 
+    update_users();
     get_rooms();
     update_list_rooms();
 
@@ -592,7 +595,7 @@ int main( int   argc,
 
     // Add list of Users.
     users_list = gtk_list_store_new (1, G_TYPE_STRING);
-    update_users();
+    
     users = create_list2 ("Users", users_list);
     gtk_table_attach_defaults (GTK_TABLE (table), users, 0, 2, 0, 2);
     gtk_widget_show (users);
