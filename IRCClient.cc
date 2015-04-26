@@ -160,7 +160,7 @@ void get_rooms() {
 void get_all_users() {
     char responce [MAX_RESPONCE];
     
-    sendCommand (host, port, "GET-ALL-USERS", user, password, "", responce);
+    sendCommand (host, port, "GET-ALL-USERS2", user, password, "", responce);
     peopleNumber = 0; 
     int i = 0;
 
@@ -275,7 +275,7 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     get_rooms();
     update_list_rooms();
     get_all_users(); 
-    update_users();
+    //update_users();
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
 
@@ -293,7 +293,7 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     password = passwords;
     
     get_all_users(); 
-    update_users();
+    //update_users();
     get_rooms();
     update_list_rooms();
 
