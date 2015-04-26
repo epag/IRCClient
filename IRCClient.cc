@@ -368,11 +368,14 @@ void join_clicked (GtkWidget *widget, gpointer data) {
     for (int i = 0; i < peopleNumber; i++) {
         if (!strcmp(user, people[i])) {
             leave_room();
-
+            get_all_users(); 
+            update_users();
             return;
         }
     }
     enter_room();
+    get_all_users(); 
+    update_users();
 }
 
 

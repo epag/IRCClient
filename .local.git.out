@@ -580,3 +580,6 @@
  3 files changed, 3 insertions(+), 1 deletion(-)
 [master 767d6f9] Make IRCclient
  3 files changed, 5 insertions(+)
+[master 7d66214] Make IRCclient
+ 3 files changed, 49 insertions(+), 31 deletions(-)
+ rewrite IRCClient (77%)
