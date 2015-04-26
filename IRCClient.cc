@@ -482,13 +482,19 @@ void log_clicked (GtkWidget *widget, gpointer data) {
 }
 
 void update_list_users (GtkWidget *widget, gpointer data) {
+    GValue tempVal = G_VALUE_INIT;
     GtkWidget * treeCpy = tree_view;
     GtkTreeSelection * roomSelected = gtk_tree_view_get_selection (GTK_TREE_VIEW (tree_view));
     GtkListStore * model = list_rooms;
     GtkTreeModel * treeModel = GTK_TREE_MODEL (model);
     GList * info = gtk_tree_selection_get_selected_rows (roomSelected, &treeModel);
     GtkTreePath * treePath = (GtkTreePath*) info->data;
-    printf("UPDATED\n");
+    GtkTreeIter * iter = (GtkTreeIter *) malloc (sizeof(GtkTreeIter));
+    gtk_tree_model_get_iter (treeModel, iter, treePath);    
+    gtk_tree_model_get_value (treeModel, iter, 0, &tempVal);
+    const GValue * GStore = (const GValue *) &tempVal;
+    gchar * selected = g_strdup (g_value_get_string (GStore));
+    printf("Selected %s\n", selected);
 }
 
 
