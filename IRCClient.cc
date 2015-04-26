@@ -347,7 +347,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
 }
 
 void join_clicked (GtkWidget *widget, gpointer data) {
-    for (int i; i < peopleNumber; i++) {
+    for (int i = 0; i < peopleNumber; i++) {
         if (!strcmp(user, people[i])) {
             leave_room();
             return;
