@@ -549,7 +549,7 @@ void update_list_users (GtkWidget *widget, gpointer data) {
 
     char responce [MAX_RESPONCE];
     
-    sendCommand (host, port, "GET-ALL-USERS-IN-ROOM", user, password, selectedRoom, responce);
+    sendCommand (host, port, "GET-USERS-IN-ROOM", user, password, selectedRoom, responce);
     peopleNumber = 0; 
     int i = 0;
 
