@@ -486,6 +486,7 @@ int main( int   argc,
 
     // Add list of rooms. Use columns 0 to 4 (exclusive) and rows 0 to 4 (exclusive)
     list_rooms = gtk_list_store_new (1, G_TYPE_STRING);
+    get_rooms();
     update_list_rooms();
     list = create_list ("Rooms", list_rooms);
     gtk_table_attach_defaults (GTK_TABLE (table), list, 2, 4, 0, 2);
@@ -538,7 +539,7 @@ int main( int   argc,
     gtk_widget_show (table);
     gtk_widget_show (window);
 
-    update_list_rooms();
+
     gtk_main ();
 
     return 0;
