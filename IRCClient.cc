@@ -211,7 +211,11 @@ void update_list_rooms() {
 void update_users() {
     GtkTreeIter iter;
     gtk_list_store_clear (GTK_LIST_STORE (users_list));
-
+    
+    if (!strcmp(people[0], "empty")) {
+        gtk_list_store_clear (GTK_LIST_STORE (users_list));
+        return;
+    }
     /* Add some messages to the window */
     for (int i = 0; i < peopleNumber; i++) {
         gchar * msg = g_strdup_printf ("%s", people[i]);
