@@ -118,6 +118,16 @@ int sendCommand (char * host, int port, char * command, char * user, char * pass
 
 }
 
+void enter_room () {
+    char responce [MAX_RESPONCE];
+    
+    sendCommand (host, port, "ENETER-ROOM", user, password, selectedRoom, responce);
+
+
+    if (!strcmp(responce, "OK\r\n")) {
+        printf ("You Joined the Room!\n");
+    }
+}
 
 void add_user() {
     char responce [MAX_RESPONCE];
@@ -317,7 +327,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
 }
 
 void join_clicked (GtkWidget *widget, gpointer data) {
-    g_print("join\n");
+    enter_room();
 }
 
 
@@ -533,16 +543,7 @@ void update_list_users (GtkWidget *widget, gpointer data) {
     printf("Selected %s\n", selectedRoom);
 }
 
-void enter_room () {
-    char responce [MAX_RESPONCE];
-    
-    sendCommand (host, port, "ENETER-ROOM", user, password, selectedRoom, responce);
 
-
-    if (!strcmp(responce, "OK\r\n")) {
-        printf ("You Joined the Room!\n");
-    }
-}
 
 
 
