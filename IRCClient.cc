@@ -197,7 +197,7 @@ void update_users() {
 
 
     /* Add some messages to the window */
-    for (int i = 0; i < peopleNumber; inList++) {
+    for (int i = 0; i < peopleNumber; i++) {
         gchar * msg = g_strdup_printf ("%s", people[i]);
         gtk_list_store_append (GTK_LIST_STORE (users_list), &iter);
         gtk_list_store_set (GTK_LIST_STORE (users_list), &iter, 0, msg,-1);
