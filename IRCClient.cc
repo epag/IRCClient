@@ -296,7 +296,7 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     get_rooms();
     update_list_rooms();
     get_all_users(); 
-    update_users();
+    //update_users();
 
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
