@@ -53,40 +53,40 @@ int lastMessage = 0;
 
 static void insert_text( GtkTextBuffer *buffer, const char * initialText )
 {
-   GtkTextIter iter;
- 
-   gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
-   gtk_text_buffer_insert (buffer, &iter, initialText,-1);
+    GtkTextIter iter;
+
+    gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
+    gtk_text_buffer_insert (buffer, &iter, initialText,-1);
 }
 
 
 
 static GtkWidget *create_text( const char * initialText )
 {
-   GtkWidget *scrolled_window;
-   GtkWidget *view;
+    GtkWidget *scrolled_window;
+    GtkWidget *view;
 
-   view = gtk_text_view_new ();
-   chatLog = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+    view = gtk_text_view_new ();
+    chatLog = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
-   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-		   	           GTK_POLICY_AUTOMATIC,
-				   GTK_POLICY_ALWAYS);
+    scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+            GTK_POLICY_AUTOMATIC,
+            GTK_POLICY_ALWAYS);
 
-   gtk_container_add (GTK_CONTAINER (scrolled_window), view);
-   insert_text (chatLog, initialText);
+    gtk_container_add (GTK_CONTAINER (scrolled_window), view);
+    insert_text (chatLog, initialText);
 
-   gtk_widget_show_all (scrolled_window);
-   gtk_text_view_set_editable(GTK_TEXT_VIEW (view), false);
+    gtk_widget_show_all (scrolled_window);
+    gtk_text_view_set_editable(GTK_TEXT_VIEW (view), false);
 
-   return scrolled_window;
+    return scrolled_window;
 }
 
 
 
 int open_client_socket (char * host, int port) {
-    
+
     struct sockaddr_in socketAddress;
 
     memset ((char *) &socketAddress, 0, sizeof(socketAddress));
@@ -154,7 +154,7 @@ int sendCommand (char * host, int port, char * command, char * user, char * pass
 
 void enter_room () {
     char responce [MAX_RESPONCE];
-    
+
     sendCommand (host, port, "ENTER-ROOM", user, password, selectedRoom, responce);
 
 
@@ -169,9 +169,9 @@ void enter_room () {
 }
 void leave_room () {
     char responce [MAX_RESPONCE];
-    
+
     sendCommand (host, port, "LEAVE-ROOM", user, password, selectedRoom, responce);
-    
+
 
 
     if (!strcmp(responce, "OK\r\n")) {
@@ -194,7 +194,7 @@ void add_user() {
 
 void add_room() {
     char responce [MAX_RESPONCE];
- 
+
     sendCommand (host, port, "CREATE-ROOM", user, password, RName, responce);
 
     if (!strcmp(responce, "OK\r\n")) {
@@ -204,7 +204,7 @@ void add_room() {
 
 void get_rooms() {
     char responce [MAX_RESPONCE];
-    
+
     sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
     RoomNumber = 0; 
     int i = 0;
@@ -216,7 +216,7 @@ void get_rooms() {
     token = strtok(responce, "*");
 
     while (token != NULL) { 
- 
+
         RoomName[i] = strdup(token);
         token = strtok(NULL, "*");
         i++;
@@ -226,7 +226,7 @@ void get_rooms() {
 
 void get_all_users() {
     char responce [MAX_RESPONCE];
-    
+
     sendCommand (host, port, "GET-ALL-USERS2", user, password, "", responce);
     peopleNumber = 0; 
     int i = 0;
@@ -238,7 +238,7 @@ void get_all_users() {
         people[j] = NULL;
     }
     while (token != NULL) { 
- 
+
         people[i] = strdup(token);
         token = strtok(NULL, "*");
         i++;
@@ -265,7 +265,7 @@ void update_list_rooms() {
 void update_users() {
     GtkTreeIter iter;
     gtk_list_store_clear (GTK_LIST_STORE (users_list));
-    
+
     if (!strcmp(people[0], "empty")) {
         gtk_list_store_clear (GTK_LIST_STORE (users_list));
         return;
@@ -288,23 +288,23 @@ void update_users() {
 
 static GtkWidget *create_text2( const char * initialText )
 {
-   GtkWidget *scrolled_window;
-   GtkWidget *view;
+    GtkWidget *scrolled_window;
+    GtkWidget *view;
 
-   view = gtk_text_view_new ();
-   messageBuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+    view = gtk_text_view_new ();
+    messageBuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
-   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-		   	           GTK_POLICY_AUTOMATIC,
-				   GTK_POLICY_ALWAYS);
+    scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+            GTK_POLICY_AUTOMATIC,
+            GTK_POLICY_ALWAYS);
 
-   gtk_container_add (GTK_CONTAINER (scrolled_window), view);
-   insert_text (messageBuffer, initialText);
+    gtk_container_add (GTK_CONTAINER (scrolled_window), view);
+    insert_text (messageBuffer, initialText);
 
-   gtk_widget_show_all (scrolled_window);
+    gtk_widget_show_all (scrolled_window);
 
-   return scrolled_window;
+    return scrolled_window;
 }
 void newUsr_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start, end;
@@ -339,7 +339,7 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
     gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     password = passwords;
-    
+
 
     get_rooms();
     update_list_rooms();
@@ -356,7 +356,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     strcat(sentMessage, (char *) gtk_text_buffer_get_text(messageBuffer, &start, &end, false));
     sprintf(sentMessage, "%s\n", sentMessage),
 
-    messages = create_text(sentMessage);
+        messages = create_text(sentMessage);
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
 
@@ -368,13 +368,53 @@ void join_clicked (GtkWidget *widget, gpointer data) {
     for (int i = 0; i < peopleNumber; i++) {
         if (!strcmp(user, people[i])) {
             leave_room();
-            get_all_users(); 
+            char responce [MAX_RESPONCE];
+
+            sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
+            peopleNumber = 0; 
+            int i = 0;
+
+            char * token;
+            token = strtok(responce, "*");
+
+            for (int j; j < 100; j++) {
+                people[j] = NULL;
+            }
+
+            while (token != NULL) { 
+
+                people[i] = strdup(token);
+                token = strtok(NULL, "*");
+                i++;
+                peopleNumber++;
+            }
+
+
             update_users();
             return;
         }
     }
-    enter_room();
-    get_all_users(); 
+            char responce [MAX_RESPONCE];
+
+            sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
+            peopleNumber = 0; 
+            int i = 0;
+
+            char * token;
+            token = strtok(responce, "*");
+
+            for (int j; j < 100; j++) {
+                people[j] = NULL;
+            }
+
+            while (token != NULL) { 
+
+                people[i] = strdup(token);
+                token = strtok(NULL, "*");
+                i++;
+                peopleNumber++;
+            }
+
     update_users();
 }
 
@@ -399,11 +439,11 @@ void create_clicked (GtkWidget *widget, gpointer data) {
     GtkWidget *password;
     GtkWidget *users;
     buffer = NULL;
-   
+
     CreateRoomwindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title (GTK_WINDOW (CreateRoomwindow), "Create New Room");
     g_signal_connect (CreateRoomwindow, "destroy",
-	              G_CALLBACK (gtk_main_quit), NULL);
+            G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (CreateRoomwindow), 10);
     gtk_widget_set_size_request (GTK_WIDGET (CreateRoomwindow), 250, 100);
 
@@ -413,19 +453,19 @@ void create_clicked (GtkWidget *widget, gpointer data) {
     gtk_table_set_row_spacings(GTK_TABLE (table), 5);
     gtk_table_set_col_spacings(GTK_TABLE (table), 5);
     gtk_widget_show (table);
-    
+
     //Collects the Users name
     name = gtk_text_view_new ();
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (name));
     gtk_text_buffer_set_text (buffer, "RoomName", -1);
     gtk_table_attach_defaults (GTK_TABLE (table), name, 1, 5, 0, 1);
     gtk_widget_show(name);
-    
+
     // Create room button
     GtkWidget *newRoom_button = gtk_button_new_with_label ("Create Room");
     gtk_table_attach_defaults(GTK_TABLE (table), newRoom_button, 1, 5, 1, 2); 
     gtk_widget_show (newRoom_button);
-    
+
     gtk_widget_show (table);
     gtk_widget_show (CreateRoomwindow);
 
@@ -448,32 +488,32 @@ static GtkWidget *create_list( const char * titleColumn, GtkListStore *model )
 
 
     int i;
-   
+
     /* Create a new scrolled window, with scrollbars only if needed */
     scrolled_window = gtk_scrolled_window_new (NULL, NULL);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-				    GTK_POLICY_AUTOMATIC, 
-				    GTK_POLICY_AUTOMATIC);
-   
+            GTK_POLICY_AUTOMATIC, 
+            GTK_POLICY_AUTOMATIC);
+
     //model = gtk_list_store_new (1, G_TYPE_STRING);
     tree_view = gtk_tree_view_new ();
     gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view);
     gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view), GTK_TREE_MODEL (model));
     gtk_widget_show (tree_view);
-   
+
     cell = gtk_cell_renderer_text_new ();
 
     column = gtk_tree_view_column_new_with_attributes (titleColumn,
-                                                       cell,
-                                                       "text", 0,
-                                                       NULL);
-  
+            cell,
+            "text", 0,
+            NULL);
+
     gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view),
-	  		         GTK_TREE_VIEW_COLUMN (column));
+            GTK_TREE_VIEW_COLUMN (column));
 
     return scrolled_window;
 }
-   
+
 static GtkWidget *create_list2( const char * titleColumn, GtkListStore *model )
 {
     GtkWidget *scrolled_window;
@@ -485,38 +525,38 @@ static GtkWidget *create_list2( const char * titleColumn, GtkListStore *model )
 
 
     int i;
-   
+
     /* Create a new scrolled window, with scrollbars only if needed */
     scrolled_window = gtk_scrolled_window_new (NULL, NULL);
     gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-				    GTK_POLICY_AUTOMATIC, 
-				    GTK_POLICY_AUTOMATIC);
-   
+            GTK_POLICY_AUTOMATIC, 
+            GTK_POLICY_AUTOMATIC);
+
     //model = gtk_list_store_new (1, G_TYPE_STRING);
     tree_view2 = gtk_tree_view_new ();
     gtk_container_add (GTK_CONTAINER (scrolled_window), tree_view2);
     gtk_tree_view_set_model (GTK_TREE_VIEW (tree_view2), GTK_TREE_MODEL (model));
     gtk_widget_show (tree_view2);
-   
+
     cell = gtk_cell_renderer_text_new ();
 
     column = gtk_tree_view_column_new_with_attributes (titleColumn,
-                                                       cell,
-                                                       "text", 0,
-                                                       NULL);
-  
+            cell,
+            "text", 0,
+            NULL);
+
     gtk_tree_view_append_column (GTK_TREE_VIEW (tree_view2),
-	  		         GTK_TREE_VIEW_COLUMN (column));
+            GTK_TREE_VIEW_COLUMN (column));
 
     return scrolled_window;
 }
 /* Add some text to our text widget - this is a callback that is invoked
-when our window is realized. We could also force our window to be
-realized with gtk_widget_realize, but it would have to be part of
-a hierarchy first */
+   when our window is realized. We could also force our window to be
+   realized with gtk_widget_realize, but it would have to be part of
+   a hierarchy first */
 
 
-   
+
 /* Create a scrolled text area that displays a "message" */
 
 void log_clicked (GtkWidget *widget, gpointer data) {
@@ -526,11 +566,11 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     GtkWidget *password;
     GtkWidget *users;
 
-   
+
     LogOnwindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title (GTK_WINDOW (LogOnwindow), "Log In Window");
     g_signal_connect (LogOnwindow, "destroy",
-	              G_CALLBACK (gtk_main_quit), NULL);
+            G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (LogOnwindow), 10);
     gtk_widget_set_size_request (GTK_WIDGET (LogOnwindow), 250, 100);
 
@@ -540,21 +580,21 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     gtk_table_set_row_spacings(GTK_TABLE (table), 5);
     gtk_table_set_col_spacings(GTK_TABLE (table), 5);
     gtk_widget_show (table);
-    
+
     //Collects the Users name
     name = gtk_text_view_new ();
     buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (name));
     gtk_text_buffer_set_text (buffer, "Name", -1);
     gtk_table_attach_defaults (GTK_TABLE (table), name, 0, 2, 0, 1);
     gtk_widget_show(name);
- 
+
     //Collects password
     password = gtk_text_view_new ();
     passwordBuffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (password));
     gtk_text_buffer_set_text (passwordBuffer, "Password", -1);
     gtk_table_attach_defaults (GTK_TABLE (table), password, 2, 4, 0, 1);
     gtk_widget_show(password);
-    
+
     // Create room button
     GtkWidget *newUsr_button = gtk_button_new_with_label ("Add User");
     gtk_table_attach_defaults(GTK_TABLE (table), newUsr_button, 0, 2, 1, 2); 
@@ -564,7 +604,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     GtkWidget *logOn_button = gtk_button_new_with_label ("Log In");
     gtk_table_attach_defaults(GTK_TABLE (table), logOn_button, 2, 4, 1, 2);
     gtk_widget_show (logOn_button);
- 
+
     gtk_widget_show (table);
     gtk_widget_show (LogOnwindow);
 
@@ -592,24 +632,24 @@ void update_list_users (GtkWidget *widget, gpointer data) {
     const GValue * GStore = (const GValue *) &tempVal;
     selectedRoom = g_strdup (g_value_get_string (GStore));
     printf("Selected %s\n", selectedRoom);
-    
+
 
 
     char responce [MAX_RESPONCE];
-    
+
     sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
     peopleNumber = 0; 
     int i = 0;
 
     char * token;
     token = strtok(responce, "*");
-    
+
     for (int j; j < 100; j++) {
         people[j] = NULL;
     }
 
     while (token != NULL) { 
- 
+
         people[i] = strdup(token);
         token = strtok(NULL, "*");
         i++;
@@ -628,13 +668,13 @@ void update_list_users (GtkWidget *widget, gpointer data) {
 
 
 int main( int   argc,
-          char *argv[] )
+        char *argv[] )
 {
 
     //SERVER CODE
-    
+
     char line[MAX_MESSAGE_LEN+1];
-    
+
     host = argv[1];
     sport = argv[2];
 
@@ -655,11 +695,11 @@ int main( int   argc,
 
     GtkWidget *list;
     gtk_init (&argc, &argv);
-   
+
     window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title (GTK_WINDOW (window), "Paned Windows");
     g_signal_connect (window, "destroy",
-	              G_CALLBACK (gtk_main_quit), NULL);
+            G_CALLBACK (gtk_main_quit), NULL);
     gtk_container_set_border_width (GTK_CONTAINER (window), 10);
     gtk_widget_set_size_request (GTK_WIDGET (window), 450, 400);
 
@@ -676,7 +716,7 @@ int main( int   argc,
     list = create_list ("Rooms", list_rooms);
     gtk_table_attach_defaults (GTK_TABLE (table), list, 2, 4, 0, 2);
     gtk_widget_show (list);
-   
+
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive)
     messages = create_text ("");
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
@@ -684,7 +724,7 @@ int main( int   argc,
 
     // Add list of Users.
     users_list = gtk_list_store_new (1, G_TYPE_STRING);
-    
+
     users = create_list2 ("Users", users_list);
     gtk_table_attach_defaults (GTK_TABLE (table), users, 0, 2, 0, 2);
     gtk_widget_show (users);
@@ -714,7 +754,7 @@ int main( int   argc,
     GtkWidget *send_button = gtk_button_new_with_label ("Send");
     gtk_table_attach_defaults(GTK_TABLE (table), send_button, 3, 4, 7, 8);
     gtk_widget_show (send_button);
- 
+
 
 
     g_signal_connect (tree_view, "cursor-changed", G_CALLBACK(update_list_users), NULL);
@@ -724,7 +764,7 @@ int main( int   argc,
     g_signal_connect (G_OBJECT(join_button), "clicked", G_CALLBACK(log_clicked), tree_view);
     gtk_widget_show (table);
     gtk_widget_show (window);
-    
+
 
     gtk_main ();
 
