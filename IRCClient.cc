@@ -292,10 +292,11 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     password = passwords;
     
-    get_all_users(); 
-    //update_users();
+
     get_rooms();
     update_list_rooms();
+    get_all_users(); 
+    update_users();
 
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
