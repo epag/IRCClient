@@ -128,13 +128,12 @@ void add_room() {
     sendCommand (host, port, "CREATE-ROOM", user, password, RName, responce);
 
     if (!strcmp(responce, "OK\r\n")) {
-        printf ("Room %s created\n", RName);
+        printf ("Room %s created", RName);
     }
 }
 
 void get_rooms() {
     char responce [MAX_RESPONCE];
-    RoomNumber = 0;
     
     sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
     
