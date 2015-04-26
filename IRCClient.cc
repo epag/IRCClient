@@ -39,7 +39,6 @@ char * password;
 char * sport;
 int port;
 char * RName;
-int inList = 0;
 gchar * selectedRoom;
 
 #define MAX_MESSAGES 100
