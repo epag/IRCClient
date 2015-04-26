@@ -40,7 +40,7 @@ char * sport;
 int port;
 char * RName;
 int inList = 0;
-
+gchar * selectedRoom;
 
 #define MAX_MESSAGES 100
 #define MAX_MESSAGE_LEN 300
@@ -529,8 +529,19 @@ void update_list_users (GtkWidget *widget, gpointer data) {
     gtk_tree_model_get_iter (treeModel, iter, treePath);    
     gtk_tree_model_get_value (treeModel, iter, 0, &tempVal);
     const GValue * GStore = (const GValue *) &tempVal;
-    gchar * selected = g_strdup (g_value_get_string (GStore));
-    printf("Selected %s\n", selected);
+    selectedRoom = g_strdup (g_value_get_string (GStore));
+    printf("Selected %s\n", selectedRoom);
+}
+
+void enter_room () {
+    char responce [MAX_RESPONCE];
+    
+    sendCommand (host, port, "ENETER-ROOM", user, password, selectedRoom, responce);
+
+
+    if (!strcmp(responce, "OK\r\n")) {
+        printf ("You Joined the Room!\n");
+    }
 }
 
 
