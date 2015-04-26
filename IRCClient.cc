@@ -537,7 +537,8 @@ int main( int   argc,
     g_signal_connect (G_OBJECT(join_button), "clicked", G_CALLBACK(log_clicked), NULL);
     gtk_widget_show (table);
     gtk_widget_show (window);
-
+    
+    get_rooms();
 
     gtk_main ();
 
