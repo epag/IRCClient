@@ -146,7 +146,6 @@ void get_rooms() {
     while (token != NULL) { 
  
         RoomName[i] = strdup(token);
-        printf ("%s\n", RoomName[i]);
         token = strtok(NULL, "*");
         i++;
     }
@@ -286,8 +285,8 @@ void newRoom_clicked (GtkWidget *widget, gpointer data) {
 
     add_room();
     get_rooms();
-
     update_list_rooms();
+
     gtk_widget_destroy(GTK_WIDGET(CreateRoomwindow));
 }
 void create_clicked (GtkWidget *widget, gpointer data) {
