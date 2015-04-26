@@ -165,7 +165,7 @@ void get_all_users() {
     int i = 0;
 
     char * token;
-    token = strtok(responce, "\n");
+    token = strtok(responce, "*");
 
     while (token != NULL) { 
  
