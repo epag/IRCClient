@@ -339,7 +339,6 @@ void join_clicked (GtkWidget *widget, gpointer data) {
 
 void newRoom_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start, end;
-    buffer = NULL;
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
     gchar*  name = (char *) gtk_text_buffer_get_text(buffer, &start, &end, false);
@@ -357,7 +356,7 @@ void create_clicked (GtkWidget *widget, gpointer data) {
     GtkWidget *name;
     GtkWidget *password;
     GtkWidget *users;
-
+    buffer = NULL;
    
     CreateRoomwindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title (GTK_WINDOW (CreateRoomwindow), "Create New Room");
