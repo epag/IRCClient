@@ -510,11 +510,11 @@ int main( int   argc,
     gtk_widget_show (messages);
 
     // Add list of Users.
-    users_list = gtk_list_store_new (1, G_TYPE_STRING);
+/*    users_list = gtk_list_store_new (1, G_TYPE_STRING);
     users = create_list ("Users", users_list);
     gtk_table_attach_defaults (GTK_TABLE (table), users, 0, 2, 0, 2);
     gtk_widget_show (users);
-
+*/
     // Add messages text. Use columns 0 to 4 (exclusive) and rows 4 to 7 (exclusive) 
 
     myMessage = create_text2 ("");
