@@ -222,7 +222,6 @@ void get_rooms() {
     while (token != NULL) { 
         RoomName[inLine] = strdup(token);
         token = strtok(NULL, "*");
-        inLine++;
         RoomNumber++;
     }
 }
