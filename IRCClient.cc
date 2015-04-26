@@ -32,7 +32,7 @@ GtkWidget *tree_view;
 GtkWidget *tree_view2;
 
 // CLIENT VARIABLES
-
+int inLine = 0;
 char * host;
 char * user;
 char * password;
@@ -213,20 +213,16 @@ void get_rooms() {
     char responce [MAX_RESPONCE];
 
     sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
-    RoomNumber = 0; 
+    inLine = 0; 
     int i = 0;
 
-    for (int j = 0; j < 100; j++) {
-        RoomName[j] = NULL;
-    }
     char * token;
     token = strtok(responce, "*");
 
     while (token != NULL) { 
-
-        RoomName[i] = strdup(token);
+        RoomName[inLine] = strdup(token);
         token = strtok(NULL, "*");
-        i++;
+        inLine++;
         RoomNumber++;
     }
 }
@@ -259,15 +255,14 @@ void get_all_users() {
 
 void update_list_rooms() {
     GtkTreeIter iter;
-    gtk_list_store_clear (GTK_LIST_STORE (list_rooms));
 
     if (!strcmp(RoomName[0], "empty")) {
         gtk_list_store_clear (GTK_LIST_STORE (list_rooms));
         return;
     }
     /* Add some messages to the window */
-    for (int i = 0; i < RoomNumber; i++) {
-        gchar * msg = g_strdup_printf ("%s", RoomName[i]);
+    for (; inLine < RoomNumber; inLine++) {
+        gchar * msg = g_strdup_printf ("%s", RoomName[inLine]);
         printf("%s", msg);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
         gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
