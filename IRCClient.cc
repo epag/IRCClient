@@ -148,6 +148,7 @@ void get_rooms() {
         RoomName[i] = strdup(token);
         token = strtok(NULL, "*");
         i++;
+        RoomNumber++;
     }
 
 }
@@ -155,7 +156,6 @@ void get_rooms() {
 // GUI FUNCTIONS
 
 void update_list_rooms() {
-    get_rooms();
     GtkTreeIter iter;
     int i;
 
