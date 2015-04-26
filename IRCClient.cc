@@ -138,8 +138,6 @@ void get_rooms() {
     
     sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
     
-    printf ("%s\n", responce);
-
     int i = 0;
 
     char * token;
@@ -148,6 +146,7 @@ void get_rooms() {
     while (token != NULL) { 
  
         RoomName[i] = strdup(token);
+        printf ("%s\n", RoomName[i]);
         token = strtok(NULL, "*");
         i++;
     }
