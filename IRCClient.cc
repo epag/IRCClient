@@ -482,7 +482,7 @@ void log_clicked (GtkWidget *widget, gpointer data) {
 }
 
 void update_list_users (GtkWidget *widget, gpointer data) {
-    gtk_tree_view_get_selection (GTK_TREE_VIEW(tree_view));
+    GtkTreeSelection * answer = gtk_tree_view_get_selection (GTK_TREE_VIEW(tree_view));
     printf("UPDATED\n");
 }
 
