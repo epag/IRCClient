@@ -140,9 +140,8 @@ void get_rooms() {
     
     printf ("%s", responce);
 
-    int i = 1;
-    int j = 0;
-    int k;
+    int i = 0;
+
     char * token;
     token = strtok(responce, "*");
 
@@ -150,7 +149,7 @@ void get_rooms() {
  
         RoomName[i] = strdup(token);
         token = strtok(NULL, "*");
-
+        i++;
     }
 
 }
