@@ -128,6 +128,16 @@ void enter_room () {
         printf ("You Joined the Room!\n");
     }
 }
+void leave_room () {
+    char responce [MAX_RESPONCE];
+    
+    sendCommand (host, port, "LEAVE-ROOM", user, password, selectedRoom, responce);
+
+
+    if (!strcmp(responce, "OK\r\n")) {
+        printf ("You left the Room!\n");
+    }
+}
 
 void add_user() {
     char responce [MAX_RESPONCE];
@@ -337,6 +347,12 @@ void send_clicked (GtkWidget *widget, gpointer data) {
 }
 
 void join_clicked (GtkWidget *widget, gpointer data) {
+    for (int i; i < peopleNumber; i++) {
+        if (!strcmp(user, people[i])) {
+            leave_room();
+            return;
+        }
+    }
     enter_room();
 }
 
