@@ -163,7 +163,7 @@ void enter_room () {
         GtkTextIter start, end;
         gtk_text_buffer_get_start_iter(messageBuffer, &start);
         gtk_text_buffer_get_end_iter(messageBuffer, &end);
-        gchar * msg = g_strdup_printf ("You left %s", selectedRoom);
+        gchar * msg = g_strdup_printf ("%s joined %s", user, selectedRoom);
         strcat(sentMessage, msg);
         sprintf(sentMessage, "%s\n", sentMessage),
         messages = create_text(sentMessage);
@@ -182,7 +182,7 @@ void leave_room () {
         GtkTextIter start, end;
         gtk_text_buffer_get_start_iter(messageBuffer, &start);
         gtk_text_buffer_get_end_iter(messageBuffer, &end);
-        gchar * msg = g_strdup_printf ("You left %s", selectedRoom);
+        gchar * msg = g_strdup_printf ("%s left %s", user, selectedRoom);
         strcat(sentMessage, msg);
         sprintf(sentMessage, "%s\n", sentMessage),
         messages = create_text(sentMessage);
