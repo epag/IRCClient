@@ -159,7 +159,7 @@ void enter_room () {
 
 
     if (!strcmp(responce, "OK\r\n")) {
-        GtkTextIter start, end;
+        /*GtkTextIter start, end;
         gtk_text_buffer_get_start_iter(messageBuffer, &start);
         gtk_text_buffer_get_end_iter(messageBuffer, &end);
         gchar * msg = g_strdup_printf ("%s joined %s", user, selectedRoom);
@@ -167,7 +167,7 @@ void enter_room () {
         sprintf(sentMessage, "%s\n", sentMessage),
         messages = create_text(sentMessage);
         gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
-        gtk_widget_show (messages);
+        gtk_widget_show (messages);*/
     }
 }
 void leave_room () {
@@ -178,7 +178,7 @@ void leave_room () {
 
 
     if (!strcmp(responce, "OK\r\n")) {
-        GtkTextIter start, end;
+        /*GtkTextIter start, end;
         gtk_text_buffer_get_start_iter(messageBuffer, &start);
         gtk_text_buffer_get_end_iter(messageBuffer, &end);
         gchar * msg = g_strdup_printf ("%s left %s", user, selectedRoom);
@@ -186,7 +186,7 @@ void leave_room () {
         sprintf(sentMessage, "%s\n", sentMessage),
         messages = create_text(sentMessage);
         gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
-        gtk_widget_show (messages);
+        gtk_widget_show (messages);*/
     }
 }
 
