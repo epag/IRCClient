@@ -51,6 +51,40 @@ int lastMessage = 0;
 // CLIENT CODE
 
 
+static void insert_text( GtkTextBuffer *buffer, const char * initialText )
+{
+   GtkTextIter iter;
+ 
+   gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
+   gtk_text_buffer_insert (buffer, &iter, initialText,-1);
+}
+
+
+
+static GtkWidget *create_text( const char * initialText )
+{
+   GtkWidget *scrolled_window;
+   GtkWidget *view;
+
+   view = gtk_text_view_new ();
+   chatLog = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
+
+   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
+   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
+		   	           GTK_POLICY_AUTOMATIC,
+				   GTK_POLICY_ALWAYS);
+
+   gtk_container_add (GTK_CONTAINER (scrolled_window), view);
+   insert_text (chatLog, initialText);
+
+   gtk_widget_show_all (scrolled_window);
+   gtk_text_view_set_editable(GTK_TEXT_VIEW (view), false);
+
+   return scrolled_window;
+}
+
+
+
 int open_client_socket (char * host, int port) {
     
     struct sockaddr_in socketAddress;
@@ -124,18 +158,28 @@ void enter_room () {
     sendCommand (host, port, "ENTER-ROOM", user, password, selectedRoom, responce);
 
 
+
     if (!strcmp(responce, "OK\r\n")) {
-        printf ("You Joined the Room!\n");
+        gchar * msg = g_strdup_printf ("You joined %s", selectedRoom);
+        messages = create_text(msg); 
+        gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+        gtk_widget_show (messages);
+        free(msg);
     }
 }
 void leave_room () {
     char responce [MAX_RESPONCE];
     
     sendCommand (host, port, "LEAVE-ROOM", user, password, selectedRoom, responce);
+    
 
 
     if (!strcmp(responce, "OK\r\n")) {
-        printf ("You left the Room!\n");
+        gchar * msg = g_strdup_printf ("You left %s", selectedRoom);
+        messages = create_text(msg); 
+        gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+        gtk_widget_show (messages);
+        free(msg);
     }
 }
 
@@ -236,37 +280,11 @@ void update_users() {
 }
 
 
-static void insert_text( GtkTextBuffer *buffer, const char * initialText )
-{
-   GtkTextIter iter;
- 
-   gtk_text_buffer_get_iter_at_offset (buffer, &iter, 0);
-   gtk_text_buffer_insert (buffer, &iter, initialText,-1);
-}
 
 
 
-static GtkWidget *create_text( const char * initialText )
-{
-   GtkWidget *scrolled_window;
-   GtkWidget *view;
 
-   view = gtk_text_view_new ();
-   chatLog = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
 
-   scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-   gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
-		   	           GTK_POLICY_AUTOMATIC,
-				   GTK_POLICY_ALWAYS);
-
-   gtk_container_add (GTK_CONTAINER (scrolled_window), view);
-   insert_text (chatLog, initialText);
-
-   gtk_widget_show_all (scrolled_window);
-   gtk_text_view_set_editable(GTK_TEXT_VIEW (view), false);
-
-   return scrolled_window;
-}
 
 static GtkWidget *create_text2( const char * initialText )
 {
@@ -350,9 +368,7 @@ void join_clicked (GtkWidget *widget, gpointer data) {
     for (int i = 0; i < peopleNumber; i++) {
         if (!strcmp(user, people[i])) {
             leave_room();
-            messages = create_text("You left the room\n");
-            gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
-            gtk_widget_show (messages);
+
             return;
         }
     }
