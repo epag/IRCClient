@@ -121,7 +121,7 @@ int sendCommand (char * host, int port, char * command, char * user, char * pass
 void enter_room () {
     char responce [MAX_RESPONCE];
     
-    sendCommand (host, port, "ENETER-ROOM", user, password, selectedRoom, responce);
+    sendCommand (host, port, "ENTER-ROOM", user, password, selectedRoom, responce);
 
 
     if (!strcmp(responce, "OK\r\n")) {
