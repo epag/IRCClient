@@ -244,6 +244,7 @@ void * getMessagesThread (void * arg) {
 
 
 void * startGetMessageThread() {
+    printf("IM STARTING\n");
     pthread_create (NULL, NULL, getMessagesThread,NULL);
 }
 
