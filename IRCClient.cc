@@ -233,12 +233,13 @@ void get_messages(char * room) {
         }
         sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
         insert_text (chatLog, responce);
+    msgNum++;
     if (msgNum == 100) {
         msgNum--;
     }
     return;
     }
-    msgNum++;
+
     free(num);
     return;
 }
