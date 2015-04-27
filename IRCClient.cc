@@ -236,6 +236,7 @@ void get_messages(char * room) {
 void * getMessagesThread (void * arg) {
     char * room = selectedRoom;
     while (1) {
+        printf("loop\n");
         get_messages(room);
         usleep(2*1000*1000);
     }
@@ -244,7 +245,6 @@ void * getMessagesThread (void * arg) {
 
 
 void * startGetMessageThread() {
-    printf("IM STARTING\n");
     pthread_create (NULL, NULL, getMessagesThread,NULL);
 }
 
