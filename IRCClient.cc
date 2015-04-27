@@ -218,7 +218,7 @@ void add_user() {
 
 void send_message() {
     char responce [MAX_RESPONCE];
-    printf("%s\nashdasd", sMsg);
+    printf("%s", sMsg);
     sendCommand (host, port, "SEND-MESSAGE", user, password, selectedRoom, responce);
     
 }
