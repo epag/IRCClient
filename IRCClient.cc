@@ -237,6 +237,7 @@ void get_messages(char * room) {
 
 void * getMessagesThread (void * arg) {
     while (1) {
+        printf("loop\n");
         if (inRoom == 1) {
             get_messages(room);
             usleep(2*1000*1000);
