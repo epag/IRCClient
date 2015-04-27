@@ -420,12 +420,12 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     send_message();
 
     //sprintf(sentMessage, "%s\n", sentMessage),
+    
+    //messages = create_text(sentMessage);
+    //gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+    //gtk_widget_show (messages);
 
-    messages = create_text(sentMessage);
-    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
-    gtk_widget_show (messages);
-
-    get_messages();
+    //get_messages();
     gtk_text_buffer_set_text (messageBuffer, "", -1);
 }
 
