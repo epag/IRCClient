@@ -238,8 +238,15 @@ void get_messages(char * room) {
 
 void * getMessagesThread (void * args) {
     while (1) {
-        if (inRoom == 1) {
-            get_messages(room);
+        if (inRoom == 1) {        
+            char responce [MAX_RESPONCE];
+            char * num = "0";
+            sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
+
+            sentMessage = responce;
+            messages = create_text(sentMessage);
+            gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+            gtk_widget_show (messages);
         }
         usleep(2*1000*1000);
     }
