@@ -242,12 +242,28 @@ void get_messages(char * room) {
     free(num);
     return;
 }
+void update_list_rooms() {
+    GtkTreeIter iter;
+
+    if (!strcmp(RoomName[0], "empty")) {
+        gtk_list_store_clear (GTK_LIST_STORE (list_rooms));
+        return;
+    }
+    /* Add some messages to the window */
+    for (; inLine < RoomNumber; inLine++) {
+        gchar * msg = g_strdup_printf ("%s", RoomName[inLine]);
+        gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
+        gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
+        free(msg);
+    }
+}
 
 void * getMessagesThread (void * args) {
         usleep(2*1000*1000);
     while (1) {
         if (inRoom == 1) { 
             get_messages(room);
+            update_list_rooms();
         }
         usleep(2*1000*1000);
     }
@@ -338,21 +354,7 @@ void get_all_users() {
 
 // GUI FUNCTIONS
 
-void update_list_rooms() {
-    GtkTreeIter iter;
 
-    if (!strcmp(RoomName[0], "empty")) {
-        gtk_list_store_clear (GTK_LIST_STORE (list_rooms));
-        return;
-    }
-    /* Add some messages to the window */
-    for (; inLine < RoomNumber; inLine++) {
-        gchar * msg = g_strdup_printf ("%s", RoomName[inLine]);
-        gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
-        gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
-        free(msg);
-    }
-}
 
 void update_users() {
     GtkTreeIter iter;
