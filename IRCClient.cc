@@ -225,9 +225,12 @@ void send_message(char * msg) {
 
 void get_messages() {
     char responce [MAX_RESPONCE];
-    
+    sentMessage = NULL; 
     sendCommand (host, port, "GET-MESSAGES", user, password, selectedRoom, responce);
     sentMessage = responce;
+    messages = create_text(sentMessage);
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+    gtk_widget_show (messages);
 }
 
 void add_room() {
