@@ -10,7 +10,6 @@
 #include <unistd.h>
 #include <pthread.h>
 
-#define NDEBUG
 
 pthread_t thread;
 int inRoom = 0;
