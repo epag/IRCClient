@@ -279,8 +279,9 @@ void * getMessagesThread (void * args) {
     while (1) {
         if (logon == 1) {
             get_rooms();
-        }
             update_list_rooms();
+        }
+
         if (inRoom == 1) {
 
             get_messages(room);
