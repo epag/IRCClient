@@ -165,7 +165,7 @@ void enter_room () {
         gchar * msg = g_strdup_printf ("%s joined %s", user, selectedRoom);
         strcat(sentMessage, msg);
         sprintf(sentMessage, "%s\n", sentMessage),
-        messages = create_text(sentMessage);
+            messages = create_text(sentMessage);
         gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
         gtk_widget_show (messages);
     }
@@ -184,7 +184,7 @@ void leave_room () {
         gchar * msg = g_strdup_printf ("%s left %s", user, selectedRoom);
         strcat(sentMessage, msg);
         sprintf(sentMessage, "%s\n", sentMessage),
-        messages = create_text(sentMessage);
+            messages = create_text(sentMessage);
         gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
         gtk_widget_show (messages);
     }
@@ -377,24 +377,24 @@ void join_clicked (GtkWidget *widget, gpointer data) {
     for (int i = 0; i < peopleNumber; i++) {
         if (!strcmp(user, people[i])) {
             leave_room();
-    sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
-    peopleNumber = 0; 
-    int i = 0;
+            sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
+            peopleNumber = 0; 
+            int i = 0;
 
-    char * token;
-    token = strtok(responce, "*");
+            char * token;
+            token = strtok(responce, "*");
 
-    for (int j; j < 100; j++) {
-        people[j] = NULL;
-    }
+            for (int j = 0; j < 100; j++) {
+                people[j] = NULL;
+            }
 
-    while (token != NULL) { 
+            while (token != NULL) { 
 
-        people[i] = strdup(token);
-        token = strtok(NULL, "*");
-        i++;
-        peopleNumber++;
-    }
+                people[i] = strdup(token);
+                token = strtok(NULL, "*");
+                i++;
+                peopleNumber++;
+            }
             update_users();
             return;
         }
@@ -407,7 +407,7 @@ void join_clicked (GtkWidget *widget, gpointer data) {
     char * token;
     token = strtok(responce, "*");
 
-    for (int j; j < 100; j++) {
+    for (int j = 0; j < 100; j++) {
         people[j] = NULL;
     }
 
@@ -636,7 +636,6 @@ void update_list_users (GtkWidget *widget, gpointer data) {
     gtk_tree_model_get_value (treeModel, iter, 0, &tempVal);
     const GValue * GStore = (const GValue *) &tempVal;
     selectedRoom = g_strdup (g_value_get_string (GStore));
-    printf("Selected %s\n", selectedRoom);
 
 
 
