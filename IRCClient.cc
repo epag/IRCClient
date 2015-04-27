@@ -51,6 +51,7 @@ int lastMessage = 0;
 // CLIENT CODE
 
 
+
 static void insert_text( GtkTextBuffer *buffer, const char * initialText )
 {
     GtkTextIter iter;
@@ -177,33 +178,7 @@ int sendCommand2 (char * host, int port, char * command, char * user, char * pas
 
 }
 
-void enter_room () {
-    char responce [MAX_RESPONCE];
 
-    sendCommand (host, port, "ENTER-ROOM", user, password, selectedRoom, responce);
-
-
-
-    if (!strcmp(responce, "OK\r\n")) {
-        GtkTextIter start, end;
-        gtk_text_buffer_get_start_iter(messageBuffer, &start);
-        gtk_text_buffer_get_end_iter(messageBuffer, &end);
-        gchar * msg = g_strdup_printf ("%s joined %s", user, selectedRoom);
-        if (sentMessage == NULL) {
-            sentMessage = msg;
-            sprintf(sentMessage, "%s\n", sentMessage);
-            messages = create_text(sentMessage);
-            gtk_table_attach_defaults (GTK_TABLE (table), messages, 0,4,2,5);
-            gtk_widget_show (messages);
-            return;
-        }
-        strcat(sentMessage, msg);
-        sprintf(sentMessage, "%s\n", sentMessage),
-            messages = create_text(sentMessage);
-        gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
-        gtk_widget_show (messages);
-    }
-}
 void leave_room () {
     char responce [MAX_RESPONCE];
 
@@ -247,16 +222,64 @@ void send_message() {
     
 }
 
-void get_messages() {
+void get_messages(char * room) {
     char responce [MAX_RESPONCE];
     char * num = "0";
-    sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, selectedRoom, responce);
+    sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
 
     sentMessage = responce;
     messages = create_text(sentMessage);
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
 }
+
+void * getMessagesThread (void * arg) {
+    char * room = selectedRoom;
+    while (1) {
+        get_messages(room);
+        usleep(2*1000*1000);
+    }
+}
+
+
+
+void * startGetMessageThread() {
+    pthread_create (NULL, NULL, getMessagesThread,NULL);
+}
+
+
+
+void enter_room () {
+    char responce [MAX_RESPONCE];
+
+    sendCommand (host, port, "ENTER-ROOM", user, password, selectedRoom, responce);
+
+
+
+    if (!strcmp(responce, "OK\r\n")) {
+        GtkTextIter start, end;
+        gtk_text_buffer_get_start_iter(messageBuffer, &start);
+        gtk_text_buffer_get_end_iter(messageBuffer, &end);
+        gchar * msg = g_strdup_printf ("%s joined %s", user, selectedRoom);
+        startGetMessageThread();
+        if (sentMessage == NULL) {
+            sentMessage = msg;
+            sprintf(sentMessage, "%s\n", sentMessage);
+            messages = create_text(sentMessage);
+            gtk_table_attach_defaults (GTK_TABLE (table), messages, 0,4,2,5);
+            gtk_widget_show (messages);
+            return;
+        }
+        strcat(sentMessage, msg);
+        sprintf(sentMessage, "%s\n", sentMessage),
+            messages = create_text(sentMessage);
+        gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+        gtk_widget_show (messages);
+    }
+}
+
+
+
 
 void add_room() {
     char responce [MAX_RESPONCE];
@@ -449,7 +472,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
 
-    get_messages();
+    //get_messages();
     gtk_text_buffer_set_text (messageBuffer, "", -1);
     return;
 }
