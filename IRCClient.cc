@@ -249,7 +249,8 @@ void send_message() {
 
 void get_messages() {
     char responce [MAX_RESPONCE];
-    sendCommand2 (host, port, "GET-MESSAGES", user, password, 0, selectedRoom, responce);
+    char * num = "0";
+    sendCommand2 (host, port, "GET-MESSAGES", user, password, num, selectedRoom, responce);
 
     sentMessage = responce;
     messages = create_text(sentMessage);
