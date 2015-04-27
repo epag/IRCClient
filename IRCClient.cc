@@ -222,8 +222,9 @@ void get_messages(char * room) {
     messages = create_text(sentMessage);
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);*/
-    if (strcmp(responce, "NO-NEW-MESSAGES\r\n")) {
         printf("here\n");
+    if (strcmp(responce, "NO-NEW-MESSAGES\r\n")) {
+
     insert_text (chatLog, responce);
     msgNum++;
     if (msgNum == 100) {
@@ -236,9 +237,7 @@ void get_messages(char * room) {
 void * getMessagesThread (void * args) {
     while (1) {
         if (inRoom == 1) { 
-            printf("HERE\n");
             get_messages(room);
-
         }
         usleep(2*1000*1000);
     }
