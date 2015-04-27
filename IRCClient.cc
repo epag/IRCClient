@@ -230,6 +230,7 @@ void get_messages(char * room) {
         msgNum--;
     }
     }
+    return;
 }
 
 void * getMessagesThread (void * args) {
