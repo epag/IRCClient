@@ -419,6 +419,7 @@ void join_clicked (GtkWidget *widget, gpointer data) {
         peopleNumber++;
     }
     update_users();
+    update_users();
     return;
 }
 
