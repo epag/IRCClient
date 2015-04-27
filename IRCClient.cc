@@ -218,7 +218,6 @@ void add_user() {
 
 void send_message() {
     char responce [MAX_RESPONCE];
-    sprintf (sMsg, " %s", sMsg);
     strcat (selectedRoom, sMsg);
     sendCommand (host, port, "SEND-MESSAGE", user, password, selectedRoom, responce);
     
