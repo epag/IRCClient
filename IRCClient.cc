@@ -185,7 +185,7 @@ int sendCommand2 (char * host, int port, char * command, char * user, char * pas
 void send_message() {
     char responce [MAX_RESPONCE];
     sendCommand2 (host, port, "SEND-MESSAGE", user, password, selectedRoom, sMsg, responce);
-    
+
 }
 
 void leave_room () {
@@ -234,17 +234,17 @@ void get_messages(char * room) {
             free(num);
         }
         msgNum--;
-    if (msgNum == 100) {
-        msgNum--;
-    }
-    return;
+        if (msgNum == 100) {
+            msgNum--;
+        }
+        return;
     }
     free(num);
     return;
 }
 void get_rooms() {
     char responce [MAX_RESPONCE];
-    
+
     for (int i = 0; i < MAX_RESPONCE; i++) {
         responce[i] = '\0';
     }
@@ -294,33 +294,33 @@ void update_users() {
 }
 
 void * getMessagesThread (void * args) {
-        usleep(2*1000*1000);
+    usleep(2*1000*1000);
     while (1) {
         if (logon == 1) {
             get_rooms();
             update_list_rooms();
-    char responce [MAX_RESPONCE];
+            char responce [MAX_RESPONCE];
 
-    sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
-    peopleNumber = 0; 
-    int i = 0;
+            sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
+            peopleNumber = 0; 
+            int i = 0;
 
-    char * token;
-    token = strtok(responce, "*");
+            char * token;
+            token = strtok(responce, "*");
 
-    for (int j = 0; j < 100; j++) {
-        people[j] = NULL;
-    }
+            for (int j = 0; j < 100; j++) {
+                people[j] = NULL;
+            }
 
-    while (token != NULL) { 
+            while (token != NULL) { 
 
-        people[i] = strdup(token);
-        token = strtok(NULL, "*");
-        i++;
-        peopleNumber++;
-    }
+                people[i] = strdup(token);
+                token = strtok(NULL, "*");
+                i++;
+                peopleNumber++;
+            }
 
-    update_users();
+            update_users();
         }
 
         if (inRoom == 1) {
@@ -353,9 +353,9 @@ void enter_room () {
     if (!strcmp(responce, "OK\r\n")) {
         sMsg = g_strdup_printf ("joined %s!", selectedRoom);
         send_message();
-            return;
-        }
-        
+        return;
+    }
+
 
 }
 
@@ -498,7 +498,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     GtkTextIter start, end;
     gtk_text_buffer_get_start_iter(messageBuffer, &start);
     gtk_text_buffer_get_end_iter(messageBuffer, &end);
-    
+
     sMsg = " ";
     sMsg = gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
     send_message();
@@ -903,7 +903,7 @@ int main( int   argc,
     g_signal_connect (G_OBJECT(join_button), "clicked", G_CALLBACK(log_clicked), NULL);
     gtk_widget_show (table);
     gtk_widget_show (window);
-    
+
     startGetMessageThread();
 
     gtk_main ();
