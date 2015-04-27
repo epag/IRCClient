@@ -30,6 +30,7 @@ int peopleNumber = 0;
 int RoomNumber = 0;
 GtkWidget *tree_view;
 GtkWidget *tree_view2;
+gchar * sMsg;
 
 // CLIENT VARIABLES
 int inLine = 0;
@@ -215,9 +216,9 @@ void add_user() {
     }
 }
 
-void send_message(gchar * msg) {
+void send_message() {
     char responce [MAX_RESPONCE];
-    printf( "%s\n", msg);
+    printf( "%s\n", sMsg);
     sendCommand (host, port, "SEND-MESSAGE", user, password, selectedRoom, responce);
     
 }
@@ -415,8 +416,8 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_end_iter(messageBuffer, &end);
     
 
-    gchar * msg = gtk_text_buffer_get_text(messageBuffer, &start, &end-1, false);
-    send_message(msg);
+    sMsg = gtk_text_buffer_get_text(messageBuffer, &start, &end-1, false);
+    send_message();
 
     //sprintf(sentMessage, "%s\n", sentMessage),
 
