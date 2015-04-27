@@ -225,7 +225,7 @@ void get_messages(char * room) {
     if (!strcmp(responce, "NO-NEW-MESSAGES\r\n")) {
         printf("hello?\n");
         msgNum--;
-        get_messages(room);
+        sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
         insert_text (chatLog, responce);
     if (msgNum == 100) {
         msgNum--;
