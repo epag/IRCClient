@@ -244,7 +244,10 @@ void get_messages(char * room) {
 }
 void get_rooms() {
     char responce [MAX_RESPONCE];
-
+    
+    for (int i = 0; i < MAX_RESPONCE; i++) {
+        responce[i] = '\0';
+    }
     sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
     RoomNumber = 0; 
     int i = 0;
