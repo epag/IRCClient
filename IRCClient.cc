@@ -226,11 +226,11 @@ void get_messages(char * room) {
         msgNum--;
         get_messages(room);
         insert_text (chatLog, responce);
-        msgNum++;
     if (msgNum == 100) {
         msgNum--;
     }
     }
+    msgNum++;
     free(num);
     return;
 }
