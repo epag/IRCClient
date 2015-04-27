@@ -424,7 +424,7 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     password = passwords;
 
-    logon = 1;
+
 
 
     add_user();
@@ -444,6 +444,7 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     sentMessage = NULL;
 
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
+    logon = 1;
 }
 
 void logOn_clicked (GtkWidget *widget, gpointer data) {
