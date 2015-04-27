@@ -371,7 +371,7 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     messages = create_text("");
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
-
+    sentMessage = NULL;
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
 
