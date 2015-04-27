@@ -214,7 +214,7 @@ void add_user() {
 
 void get_messages(char * room) {
     char responce [MAX_RESPONCE];
-    char * num;
+    char * num = (char *) malloc(sizeof(char) * 100);;
     sprintf(num, "%d", msgNum);
     printf( "%c", num);
     sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
