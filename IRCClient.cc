@@ -213,9 +213,11 @@ void add_user() {
 
 
 void get_messages(char * room) {
+    char answ [MAX_RESPONCE];
     char responce [MAX_RESPONCE];
     for (int i = 0; i < MAX_RESPONCE; i++) {
         responce[i] = '\0';
+        answ[i] = '\0';
     }
 
     char * num = (char *) malloc(sizeof(char) * 100);;
@@ -224,10 +226,14 @@ void get_messages(char * room) {
     if (strcmp(responce, "NO-NEW-MESSAGES\r\n")) {
         sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
         insert_text (chatLog, responce);
-        while (strcmp (responce, "NO-NEW-MESSAGES\r\n")) {
+        while (strcmp (answ, "NO-NEW-MESSAGES\r\n")) {
+            for (int i = 0; i < MAX_RESPONCE; i++) {
+                responce[i] = '\0';
+                answ[i] = '\0';
+            }
             char * num = (char *) malloc(sizeof(char) * 100);;
             sprintf(num, "%d", msgNum);
-            sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
+            sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, answ);
             msgNum++;
             free(num);
         }
