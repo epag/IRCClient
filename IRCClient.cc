@@ -11,6 +11,7 @@
 #include <pthread.h>
 
 
+pthread_t thread;
 int inRoom = 0;
 char * room;
 GtkWidget *table;
@@ -251,7 +252,7 @@ void * getMessagesThread (void * args) {
 
 void * startGetMessageThread() {
 
-    pthread_create (NULL, NULL, getMessagesThread,NULL);
+    pthread_create (&thread, NULL, getMessagesThread,NULL);
     printf("starting loop\n");
 }
 
