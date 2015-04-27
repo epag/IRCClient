@@ -196,6 +196,7 @@ void leave_room () {
 
 
     if (!strcmp(responce, "OK\r\n")) {
+        selectedRoom = room;
         sMsg = g_strdup_printf ("%s left %s", user, selectedRoom);
         send_message();
     }
