@@ -235,7 +235,6 @@ void get_messages(char * room) {
     }
     return;
     }
-    msgNum--;
     free(num);
     return;
 }
