@@ -417,6 +417,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     
     sMsg = "";
     sMsg = gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
+    printf ("%s\n", sMsg);
     send_message();
 
     //sprintf(sentMessage, "%s\n", sentMessage),
