@@ -242,6 +242,22 @@ void get_messages(char * room) {
     free(num);
     return;
 }
+void get_rooms() {
+    char responce [MAX_RESPONCE];
+
+    sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
+    RoomNumber = 0; 
+    int i = 0;
+
+    char * token;
+    token = strtok(responce, "*");
+
+    while (token != NULL) { 
+        RoomName[inLine] = strdup(token);
+        token = strtok(NULL, "*");
+        RoomNumber++;
+    }
+}
 void update_list_rooms() {
     GtkTreeIter iter;
 
@@ -261,7 +277,8 @@ void update_list_rooms() {
 void * getMessagesThread (void * args) {
         usleep(2*1000*1000);
     while (1) {
-        if (inRoom == 1) { 
+        if (inRoom == 1) {
+            get_rooms();
             get_messages(room);
             update_list_rooms();
         }
@@ -309,22 +326,7 @@ void add_room() {
     }
 }
 
-void get_rooms() {
-    char responce [MAX_RESPONCE];
 
-    sendCommand (host, port, "GET-ROOMS", user, password, "", responce);
-    RoomNumber = 0; 
-    int i = 0;
-
-    char * token;
-    token = strtok(responce, "*");
-
-    while (token != NULL) { 
-        RoomName[inLine] = strdup(token);
-        token = strtok(NULL, "*");
-        RoomNumber++;
-    }
-}
 
 void get_all_users() {
     char responce [MAX_RESPONCE];

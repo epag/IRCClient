@@ -888,3 +888,5 @@
  3 files changed, 4 insertions(+), 7 deletions(-)
 [master 2331a75] Make IRCclient
  3 files changed, 5 insertions(+), 1 deletion(-)
+[master 4e83b06] Make IRCclient
+ 3 files changed, 18 insertions(+), 14 deletions(-)
