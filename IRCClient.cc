@@ -249,8 +249,7 @@ void send_message() {
 
 void get_messages() {
     char responce [MAX_RESPONCE];
-    sprintf (selectedRoom, "%d %s", 0, selectedRoom);
-    sendCommand (host, port, "GET-MESSAGES", user, password, selectedRoom, responce);
+    sendCommand2 (host, port, "GET-MESSAGES", user, password, 0, selectedRoom, responce);
 
     sentMessage = responce;
     messages = create_text(sentMessage);
