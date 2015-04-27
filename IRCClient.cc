@@ -13,7 +13,7 @@
 
 pthread_t thread;
 int inRoom = 0;
-char * room;
+char * room = NULL;
 GtkWidget *table;
 GtkWidget *messages;
 GtkListStore * list_rooms;
