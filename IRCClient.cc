@@ -823,7 +823,7 @@ int main( int   argc,
     g_signal_connect (G_OBJECT(send_button), "clicked", G_CALLBACK(send_clicked), NULL);
     g_signal_connect (G_OBJECT(leave_button), "clicked", G_CALLBACK(join_clicked), NULL);
     g_signal_connect (G_OBJECT(create_button), "clicked", G_CALLBACK(create_clicked), NULL);
-    g_signal_connect (G_OBJECT(join_button), "clicked", G_CALLBACK(log_clicked), tree_view);
+    g_signal_connect (G_OBJECT(join_button), "clicked", G_CALLBACK(log_clicked), NULL);
     gtk_widget_show (table);
     gtk_widget_show (window);
 
