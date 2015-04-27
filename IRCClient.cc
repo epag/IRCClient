@@ -277,10 +277,12 @@ void update_list_rooms() {
 void * getMessagesThread (void * args) {
         usleep(2*1000*1000);
     while (1) {
-        if (inRoom == 1) {
             get_rooms();
-            get_messages(room);
             update_list_rooms();
+        if (inRoom == 1) {
+
+            get_messages(room);
+
         }
         usleep(2*1000*1000);
     }
