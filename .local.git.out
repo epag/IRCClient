@@ -774,3 +774,6 @@
 [master 18131d3] Make IRCclient
  4 files changed, 4 insertions(+), 1 deletion(-)
  delete mode 100644 .talk-client.c.swp
+[master f5facc7] Make IRCclient
+ 3 files changed, 4 insertions(+), 3 deletions(-)
+ rewrite IRCClient (75%)

@@ -239,9 +239,7 @@ void get_messages(char * room) {
 void * getMessagesThread (void * args) {
     while (1) {
         if (inRoom == 1) {
-            char * num = "0";
-            char responce [MAX_RESPONCE];
-            sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
+            get_messages(room);
         }
         usleep(2*1000*1000);
     }
