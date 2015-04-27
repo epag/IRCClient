@@ -181,6 +181,11 @@ int sendCommand2 (char * host, int port, char * command, char * user, char * pas
 
 }
 
+void send_message() {
+    char responce [MAX_RESPONCE];
+    sendCommand2 (host, port, "SEND-MESSAGE", user, password, selectedRoom, sMsg, responce);
+    
+}
 
 void leave_room () {
     char responce [MAX_RESPONCE];
@@ -191,22 +196,8 @@ void leave_room () {
 
     if (!strcmp(responce, "OK\r\n")) {
         GtkTextIter start, end;
-        gtk_text_buffer_get_start_iter(messageBuffer, &start);
-        gtk_text_buffer_get_end_iter(messageBuffer, &end);
-        gchar * msg = g_strdup_printf ("%s left %s", user, selectedRoom);
-        if (sentMessage == NULL) {
-            sentMessage = msg;
-            sprintf(sentMessage, "%s\n", sentMessage);
-            messages = create_text(sentMessage);
-            gtk_table_attach_defaults (GTK_TABLE (table), messages, 0,4,2,5);
-            gtk_widget_show (messages);
-            return;
-        }
-        strcat(sentMessage, msg);
-        sprintf(sentMessage, "%s\n", sentMessage),
-            messages = create_text(sentMessage);
-        gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
-        gtk_widget_show (messages);
+        sMsg = g_strdup_printf ("%s left %s", user, selectedRoom);
+        send_message();
     }
 }
 
@@ -219,11 +210,7 @@ void add_user() {
     }
 }
 
-void send_message() {
-    char responce [MAX_RESPONCE];
-    sendCommand2 (host, port, "SEND-MESSAGE", user, password, selectedRoom, sMsg, responce);
-    
-}
+
 
 void get_messages(char * room) {
     char responce [MAX_RESPONCE];
@@ -265,27 +252,12 @@ void enter_room () {
 
 
     if (!strcmp(responce, "OK\r\n")) {
-        /*GtkTextIter start, end;
-        gtk_text_buffer_get_start_iter(messageBuffer, &start);
-        gtk_text_buffer_get_end_iter(messageBuffer, &end);
-        gchar * msg = g_strdup_printf ("%s joined %s", user, selectedRoom);
-        startGetMessageThread();
-        if (sentMessage == NULL) {
-            sentMessage = msg;
-            sprintf(sentMessage, "%s\n", sentMessage);
-            messages = create_text(sentMessage);
-            gtk_table_attach_defaults (GTK_TABLE (table), messages, 0,4,2,5);
-            gtk_widget_show (messages);
+        sMsg = g_strdup_printf ("%s joined %s!", user, selectedRoom);
+        send_message();
             return;
         }
-        strcat(sentMessage, msg);
-        sprintf(sentMessage, "%s\n", sentMessage),
-            messages = create_text(sentMessage);
-        gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
-        gtk_widget_show (messages);*/
         
 
-    }
 }
 
 
