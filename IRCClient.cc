@@ -426,7 +426,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);
 
-
+    get_messages();
     gtk_text_buffer_set_text (messageBuffer, "", -1);
 }
 
@@ -721,7 +721,6 @@ void update_list_users (GtkWidget *widget, gpointer data) {
     }
 
     update_users();
-    get_messages();
 }
 
 
