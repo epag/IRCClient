@@ -163,6 +163,14 @@ void enter_room () {
         gtk_text_buffer_get_start_iter(messageBuffer, &start);
         gtk_text_buffer_get_end_iter(messageBuffer, &end);
         gchar * msg = g_strdup_printf ("%s joined %s", user, selectedRoom);
+        if (sentMessage = NULL) {
+            sentMessage = msg;
+            sprintf(sentMessage, "%s\n", sentMessage);
+            messages = create_text(sentMessage);
+            gtk_table_attach_defaults (GTK_TABLE (table), messages, 0,4,2,5);
+            gtk_widget_show (messages);
+            return;
+        }
         strcat(sentMessage, msg);
         sprintf(sentMessage, "%s\n", sentMessage),
             messages = create_text(sentMessage);
