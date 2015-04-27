@@ -331,6 +331,17 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     update_list_rooms();
     get_all_users(); 
     update_users();
+
+
+    GtkTextIter start3, end3;
+    gtk_text_buffer_get_start_iter(messageBuffer, &start3);
+    gtk_text_buffer_get_end_iter(messageBuffer, &end3);
+
+    messages = create_text("");
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+    gtk_widget_show (messages);
+
+
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
 
@@ -352,6 +363,14 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     update_list_rooms();
     get_all_users(); 
     update_users();
+
+    GtkTextIter start3, end3;
+    gtk_text_buffer_get_start_iter(messageBuffer, &start3);
+    gtk_text_buffer_get_end_iter(messageBuffer, &end3);
+
+    messages = create_text("");
+    gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
+    gtk_widget_show (messages);
 
     gtk_widget_destroy(GTK_WIDGET(LogOnwindow));
 }
