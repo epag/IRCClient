@@ -407,7 +407,7 @@ static GtkWidget *create_text2( const char * initialText )
     return scrolled_window;
 }
 void newUsr_clicked (GtkWidget *widget, gpointer data) {
-    logon = 1;
+
     GtkTextIter start, end;
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
@@ -419,6 +419,9 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_end_iter(passwordBuffer, &end2);
     gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     password = passwords;
+
+    logon = 1;
+
 
     add_user();
     get_rooms();
@@ -440,7 +443,7 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
 }
 
 void logOn_clicked (GtkWidget *widget, gpointer data) {
-    logon = 1;
+
     GtkTextIter start, end;
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
@@ -453,6 +456,7 @@ void logOn_clicked (GtkWidget *widget, gpointer data) {
     gchar* passwords = (char *) gtk_text_buffer_get_text(passwordBuffer, &start2, &end2, false);
     password = passwords;
 
+    logon = 1;
 
     get_rooms();
     update_list_rooms();
