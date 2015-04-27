@@ -191,7 +191,7 @@ void send_message() {
 void leave_room () {
     char responce [MAX_RESPONCE];
     inRoom = 0;
-    sMsg = g_strdup_printf ("%s left %s", user, selectedRoom);
+    sMsg = g_strdup_printf ("left %s", selectedRoom);
     send_message();
     sendCommand (host, port, "LEAVE-ROOM", user, password, selectedRoom, responce);
 
@@ -313,7 +313,7 @@ void enter_room () {
 
 
     if (!strcmp(responce, "OK\r\n")) {
-        sMsg = g_strdup_printf ("%s joined %s!", user, selectedRoom);
+        sMsg = g_strdup_printf ("joined %s!", selectedRoom);
         send_message();
             return;
         }
