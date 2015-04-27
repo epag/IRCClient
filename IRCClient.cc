@@ -298,7 +298,6 @@ void update_list_rooms() {
     /* Add some messages to the window */
     for (; inLine < RoomNumber; inLine++) {
         gchar * msg = g_strdup_printf ("%s", RoomName[inLine]);
-        printf("%s", msg);
         gtk_list_store_append (GTK_LIST_STORE (list_rooms), &iter);
         gtk_list_store_set (GTK_LIST_STORE (list_rooms), &iter, 0, msg,-1);
         free(msg);
