@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <pthread.h>
 
-
+int logon = 0;
 pthread_t thread;
 int inRoom = 0;
 char * room = NULL;
@@ -277,7 +277,9 @@ void update_list_rooms() {
 void * getMessagesThread (void * args) {
         usleep(2*1000*1000);
     while (1) {
+        if (logon == 1) {
             get_rooms();
+        }
             update_list_rooms();
         if (inRoom == 1) {
 
@@ -405,6 +407,7 @@ static GtkWidget *create_text2( const char * initialText )
     return scrolled_window;
 }
 void newUsr_clicked (GtkWidget *widget, gpointer data) {
+    logon = 1;
     GtkTextIter start, end;
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
@@ -437,6 +440,7 @@ void newUsr_clicked (GtkWidget *widget, gpointer data) {
 }
 
 void logOn_clicked (GtkWidget *widget, gpointer data) {
+    logon = 1;
     GtkTextIter start, end;
     gtk_text_buffer_get_start_iter(buffer, &start);
     gtk_text_buffer_get_end_iter(buffer, &end);
@@ -679,7 +683,6 @@ void log_clicked (GtkWidget *widget, gpointer data) {
     GtkWidget *name;
     GtkWidget *password;
     GtkWidget *users;
-
 
     LogOnwindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title (GTK_WINDOW (LogOnwindow), "Log In Window");
