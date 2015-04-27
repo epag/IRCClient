@@ -218,7 +218,7 @@ void add_user() {
 
 void send_message() {
     char responce [MAX_RESPONCE];
-    printf( "%s\n", sMsg);
+    printf("%s\nashdasd", sMsg);
     sendCommand (host, port, "SEND-MESSAGE", user, password, selectedRoom, responce);
     
 }
@@ -415,7 +415,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_start_iter(messageBuffer, &start);
     gtk_text_buffer_get_end_iter(messageBuffer, &end);
     
-
+    sMsg = "";
     sMsg = gtk_text_buffer_get_text(messageBuffer, &start, &end-1, false);
     send_message();
 
