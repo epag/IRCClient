@@ -750,7 +750,7 @@ void update_list_users (GtkWidget *widget, gpointer data) {
     gtk_tree_model_get_value (treeModel, iter, 0, &tempVal);
     const GValue * GStore = (const GValue *) &tempVal;
     selectedRoom = g_strdup (g_value_get_string (GStore));
-
+    room = selectedRoom;
 
 
     char responce [MAX_RESPONCE];
