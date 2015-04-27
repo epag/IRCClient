@@ -235,7 +235,7 @@ void get_messages(char * room) {
     gtk_widget_show (messages);
 }
 
-void * getMessagesThread (void * arg) {
+void * getMessagesThread (void * args) {
     while (1) {
         printf("loop\n");
         if (inRoom == 1) {
