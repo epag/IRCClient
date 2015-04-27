@@ -219,7 +219,7 @@ void send_message(gchar * msg) {
     char responce [MAX_RESPONCE];
     sprintf (msg, " %s", msg);
     strcat (selectedRoom, msg);
-    printf( "%s\n", selectedRoom);
+    printf( "%s\n", msg);
     sendCommand (host, port, "SEND-MESSAGE", user, password, selectedRoom, responce);
     
 }
