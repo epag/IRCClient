@@ -222,6 +222,7 @@ void get_messages(char * room) {
     messages = create_text(sentMessage);
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);*/
+    printf("%s\n", responce);
     if (!strcmp(responce, "NO-NEW-MESSAGES\r\n")) {
         printf("hello?\n");
         msgNum--;
