@@ -419,6 +419,27 @@ void join_clicked (GtkWidget *widget, gpointer data) {
         peopleNumber++;
     }
     update_users();
+    char responce2 [MAX_RESPONCE];
+
+    sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce2);
+    peopleNumber = 0; 
+    int ii = 0;
+
+    char * token2;
+    token2 = strtok(responce2, "*");
+
+    for (int j = 0; j < 100; j++) {
+        people[j] = NULL;
+    }
+
+    while (token2 != NULL) { 
+
+        people[ii] = strdup(token);
+        token2 = strtok(NULL, "*");
+        ii++;
+        peopleNumber++;
+    }
+
     update_users();
     return;
 }
