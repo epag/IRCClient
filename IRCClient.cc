@@ -434,7 +434,7 @@ void join_clicked (GtkWidget *widget, gpointer data) {
 
     while (token2 != NULL) { 
 
-        people[ii] = strdup(token);
+        people[ii] = strdup(token2);
         token2 = strtok(NULL, "*");
         ii++;
         peopleNumber++;
