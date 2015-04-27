@@ -229,7 +229,7 @@ void get_messages(char * room) {
     char responce [MAX_RESPONCE];
     char * num = "0";
     sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
-
+    gtk_widget_destroy(messages);
     sentMessage = responce;
     messages = create_text(sentMessage);
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
