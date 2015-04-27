@@ -151,6 +151,31 @@ int sendCommand (char * host, int port, char * command, char * user, char * pass
     close (sock);
 
 }
+int sendCommand2 (char * host, int port, char * command, char * user, char * password, char * args, char * message, char * responce) {
+
+    int sock = open_client_socket (host, port);
+
+    write (sock, command, strlen(command));
+    write (sock, " ", 1);
+    write (sock, user, strlen(user));
+    write (sock, " ", 1);
+    write (sock, password, strlen(password));
+    write (sock, " ", 1);
+    write (sock, args, strlen(args));
+    write (sock, " ", 1);
+    write (sock, message, strlen(message));
+    write (sock, "\r\n", 2);
+
+    int n = 0;
+    int len = 0;
+
+    while ((n=read(sock, responce+len, MAX_RESPONCE - len)) > 0) {
+        len += n;
+    }
+
+    close (sock);
+
+}
 
 void enter_room () {
     char responce [MAX_RESPONCE];
@@ -218,8 +243,7 @@ void add_user() {
 
 void send_message() {
     char responce [MAX_RESPONCE];
-    strcat (selectedRoom, sMsg);
-    sendCommand (host, port, "SEND-MESSAGE", user, password, selectedRoom, responce);
+    sendCommand2 (host, port, "SEND-MESSAGE", user, password, selectedRoom, sMsg, responce);
     
 }
 
@@ -415,7 +439,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_start_iter(messageBuffer, &start);
     gtk_text_buffer_get_end_iter(messageBuffer, &end);
     
-    sMsg = "";
+    sMsg = " ";
     sMsg = gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
     send_message();
 
