@@ -237,6 +237,7 @@ void get_messages(char * room) {
             msgNum++;
             free(num);
         }
+        msgNum--;
     if (msgNum == 100) {
         msgNum--;
     }
