@@ -191,15 +191,10 @@ void send_message() {
 void leave_room () {
     char responce [MAX_RESPONCE];
     inRoom = 0;
+    sMsg = g_strdup_printf ("%s left %s", user, selectedRoom);
+    send_message();
     sendCommand (host, port, "LEAVE-ROOM", user, password, selectedRoom, responce);
 
-
-
-    if (!strcmp(responce, "OK\r\n")) {
-        selectedRoom = room;
-        sMsg = g_strdup_printf ("%s left %s", user, selectedRoom);
-        send_message();
-    }
 }
 
 void add_user() {
