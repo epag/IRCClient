@@ -228,7 +228,9 @@ void get_messages(char * room) {
     gtk_widget_show (messages);*/
     printf("%s\n", responce);
     if (strcmp(responce, "NO-NEW-MESSAGES\r\n")) {
+        if (msgNum != 0) {
         msgNum--;
+        }
         sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
         insert_text (chatLog, responce);
     if (msgNum == 100) {
