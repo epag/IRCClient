@@ -312,7 +312,9 @@ void get_rooms() {
 
 void get_all_users() {
     char responce [MAX_RESPONCE];
-
+    for (int i = 0; i < MAX_RESPONCE; i++) {
+        responce[i] = '\0';
+    }
     sendCommand (host, port, "GET-ALL-USERS2", user, password, "", responce);
     peopleNumber = 0; 
     int i = 0;
