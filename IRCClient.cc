@@ -235,7 +235,8 @@ void get_messages(char * room) {
 
 void * getMessagesThread (void * args) {
     while (1) {
-        if (inRoom == 1) {  
+        if (inRoom == 1) { 
+            printf("HERE\n");
             get_messages(room);
 
         }
