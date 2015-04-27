@@ -223,7 +223,9 @@ void get_messages(char * room) {
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);*/
     if (strcmp(responce, "NO-NEW-MESSAGES\r\n")) {
+        if (msgNum != 0) {
     msgNum--;
+        }
     get_messages(room);
     insert_text (chatLog, responce);
     msgNum++;
