@@ -214,9 +214,13 @@ void add_user() {
 
 void get_messages(char * room) {
     char responce [MAX_RESPONCE];
+    for (int i = 0; i < MAX_RESPONCE; i++) {
+        responce[i] = '\0';
+    }
+
     char * num = (char *) malloc(sizeof(char) * 100);;
     sprintf(num, "%d", msgNum);
-    sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
+    sendCommand2(host, port, "GET-MESSAGES2", user, password, num, room, responce);
     /*gtk_widget_destroy(messages);
     sentMessage = responce;
     messages = create_text(sentMessage);
