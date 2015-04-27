@@ -276,6 +276,22 @@ void update_list_rooms() {
         free(msg);
     }
 }
+void update_users() {
+    GtkTreeIter iter;
+    gtk_list_store_clear (GTK_LIST_STORE (users_list));
+
+    if (!strcmp(people[0], "empty")) {
+        gtk_list_store_clear (GTK_LIST_STORE (users_list));
+        return;
+    }
+    /* Add some messages to the window */
+    for (int i = 0; i < peopleNumber; i++) {
+        gchar * msg = g_strdup_printf ("%s", people[i]);
+        gtk_list_store_append (GTK_LIST_STORE (users_list), &iter);
+        gtk_list_store_set (GTK_LIST_STORE (users_list), &iter, 0, msg,-1);
+        free(msg);
+    }
+}
 
 void * getMessagesThread (void * args) {
         usleep(2*1000*1000);
@@ -283,6 +299,28 @@ void * getMessagesThread (void * args) {
         if (logon == 1) {
             get_rooms();
             update_list_rooms();
+    char responce [MAX_RESPONCE];
+
+    sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
+    peopleNumber = 0; 
+    int i = 0;
+
+    char * token;
+    token = strtok(responce, "*");
+
+    for (int j = 0; j < 100; j++) {
+        people[j] = NULL;
+    }
+
+    while (token != NULL) { 
+
+        people[i] = strdup(token);
+        token = strtok(NULL, "*");
+        i++;
+        peopleNumber++;
+    }
+
+    update_users();
         }
 
         if (inRoom == 1) {
@@ -366,22 +404,7 @@ void get_all_users() {
 
 
 
-void update_users() {
-    GtkTreeIter iter;
-    gtk_list_store_clear (GTK_LIST_STORE (users_list));
 
-    if (!strcmp(people[0], "empty")) {
-        gtk_list_store_clear (GTK_LIST_STORE (users_list));
-        return;
-    }
-    /* Add some messages to the window */
-    for (int i = 0; i < peopleNumber; i++) {
-        gchar * msg = g_strdup_printf ("%s", people[i]);
-        gtk_list_store_append (GTK_LIST_STORE (users_list), &iter);
-        gtk_list_store_set (GTK_LIST_STORE (users_list), &iter, 0, msg,-1);
-        free(msg);
-    }
-}
 
 
 
