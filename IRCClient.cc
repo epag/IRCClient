@@ -216,14 +216,12 @@ void get_messages(char * room) {
     char responce [MAX_RESPONCE];
     char * num = (char *) malloc(sizeof(char) * 100);;
     sprintf(num, "%d", msgNum);
-    printf( "%c", num);
     sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
     /*gtk_widget_destroy(messages);
     sentMessage = responce;
     messages = create_text(sentMessage);
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);*/
-        printf("here\n");
     if (strcmp(responce, "NO-NEW-MESSAGES\r\n")) {
 
     insert_text (chatLog, responce);
@@ -232,6 +230,7 @@ void get_messages(char * room) {
         msgNum--;
     }
     }
+    free(num);
     return;
 }
 
