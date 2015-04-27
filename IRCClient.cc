@@ -247,6 +247,7 @@ void * getMessagesThread (void * args) {
             messages = create_text(sentMessage);
             gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
             gtk_widget_show (messages);
+            usleep(2*1000*1000);
         }
         usleep(2*1000*1000);
     }
