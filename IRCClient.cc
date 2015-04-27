@@ -11,6 +11,8 @@
 #include <pthread.h>
 
 
+int inRoom = 0;
+char * room;
 GtkWidget *table;
 GtkWidget *messages;
 GtkListStore * list_rooms;
@@ -234,12 +236,11 @@ void get_messages(char * room) {
 }
 
 void * getMessagesThread (void * arg) {
-        printf("loop\n");
-    char * room = selectedRoom;
     while (1) {
-
-        get_messages(room);
-        usleep(2*1000*1000);
+        if (inRoom == 1) {
+            get_messages(room);
+            usleep(2*1000*1000);
+        }
     }
 }
 
@@ -254,6 +255,8 @@ void * startGetMessageThread() {
 void enter_room () {
     char responce [MAX_RESPONCE];
 
+    inRoom = 1;
+    room = selectedRoom;
     sendCommand (host, port, "ENTER-ROOM", user, password, selectedRoom, responce);
 
 
@@ -278,8 +281,6 @@ void enter_room () {
         gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
         gtk_widget_show (messages);*/
         
-        printf ("HAHAHA\n");
-        startGetMessageThread();
 
     }
 }
@@ -880,7 +881,8 @@ int main( int   argc,
     g_signal_connect (G_OBJECT(join_button), "clicked", G_CALLBACK(log_clicked), NULL);
     gtk_widget_show (table);
     gtk_widget_show (window);
-
+    
+    startGetMessageThread();
 
     gtk_main ();
 
