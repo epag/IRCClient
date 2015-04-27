@@ -720,6 +720,7 @@ void update_list_users (GtkWidget *widget, gpointer data) {
     }
 
     update_users();
+    get_messages();
 }
 
 
