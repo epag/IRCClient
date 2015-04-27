@@ -36,6 +36,7 @@ GtkWidget *tree_view2;
 gchar * sMsg = NULL;
 
 // CLIENT VARIABLES
+int msgNum = 0;
 int inLine = 0;
 char * host = NULL;
 char * user = NULL;
@@ -213,13 +214,16 @@ void add_user() {
 
 void get_messages(char * room) {
     char responce [MAX_RESPONCE];
-    char * num = "0";
+    char * num;
+    sprintf(num, "%d", msgNum);
     sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
     /*gtk_widget_destroy(messages);
     sentMessage = responce;
     messages = create_text(sentMessage);
     gtk_table_attach_defaults (GTK_TABLE (table), messages, 0, 4, 2, 5);
     gtk_widget_show (messages);*/
+    if (!strcmp(responce, "NO-NEW-MESSAGES\r\n")) {
+    }
     insert_text (chatLog, responce);
 }
 
