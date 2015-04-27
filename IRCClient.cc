@@ -195,7 +195,6 @@ void leave_room () {
 
 
     if (!strcmp(responce, "OK\r\n")) {
-        GtkTextIter start, end;
         sMsg = g_strdup_printf ("%s left %s", user, selectedRoom);
         send_message();
     }
