@@ -218,8 +218,7 @@ void add_user() {
 
 void send_message() {
     char responce [MAX_RESPONCE];
-    printf("%s\n", sMsg);
-    //sendCommand (host, port, "SEND-MESSAGE", user, password, selectedRoom, responce);
+    sendCommand (host, port, "SEND-MESSAGE", user, password, selectedRoom, responce);
     
 }
 
@@ -417,7 +416,6 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     
     sMsg = "";
     sMsg = gtk_text_buffer_get_text(messageBuffer, &start, &end, false);
-    printf ("%s\n", sMsg);
     send_message();
 
     //sprintf(sentMessage, "%s\n", sentMessage),
