@@ -299,6 +299,9 @@ void * getMessagesThread (void * args) {
         if (logon == 1) {
             get_rooms();
             update_list_rooms();
+        }
+
+        if (inRoom == 1) {
             char responce [MAX_RESPONCE];
 
             sendCommand (host, port, "GET-USERS-IN-ROOM2", user, password, selectedRoom, responce);
@@ -321,9 +324,6 @@ void * getMessagesThread (void * args) {
             }
 
             update_users();
-        }
-
-        if (inRoom == 1) {
 
             get_messages(room);
 
