@@ -250,8 +250,9 @@ void * getMessagesThread (void * args) {
 
 
 void * startGetMessageThread() {
-    printf("starting loop\n");
+
     pthread_create (NULL, NULL, getMessagesThread,NULL);
+    printf("starting loop\n");
 }
 
 
