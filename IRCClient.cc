@@ -428,6 +428,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
 
     //get_messages();
     gtk_text_buffer_set_text (messageBuffer, "", -1);
+    return;
 }
 
 
