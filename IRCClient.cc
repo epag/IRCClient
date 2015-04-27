@@ -248,6 +248,7 @@ void * getMessagesThread (void * arg) {
 
 
 void * startGetMessageThread() {
+    printf("starting loop\n");
     pthread_create (NULL, NULL, getMessagesThread,NULL);
 }
 
