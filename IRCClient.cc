@@ -215,7 +215,7 @@ void add_user() {
     }
 }
 
-void send_message(char * msg) {
+void send_message(gchar * msg) {
     char responce [MAX_RESPONCE];
     sprintf (msg, " %s", msg);
     strcat (selectedRoom, msg);
@@ -418,7 +418,7 @@ void send_clicked (GtkWidget *widget, gpointer data) {
     gtk_text_buffer_get_end_iter(messageBuffer, &end);
     
 
-    char * msg = gtk_text_buffer_get_text(messageBuffer, &start, &end-1, false);
+    gchar * msg = gtk_text_buffer_get_text(messageBuffer, &start, &end-1, false);
     send_message(msg);
 
     //sprintf(sentMessage, "%s\n", sentMessage),
