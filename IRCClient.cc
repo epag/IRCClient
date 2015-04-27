@@ -190,7 +190,7 @@ void send_message() {
 
 void leave_room () {
     char responce [MAX_RESPONCE];
-
+    inRoom = 0;
     sendCommand (host, port, "LEAVE-ROOM", user, password, selectedRoom, responce);
 
 
