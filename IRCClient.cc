@@ -216,6 +216,7 @@ void get_messages(char * room) {
     char responce [MAX_RESPONCE];
     char * num;
     sprintf(num, "%d", msgNum);
+    printf( "%c", num);
     sendCommand2 (host, port, "GET-MESSAGES2", user, password, num, room, responce);
     /*gtk_widget_destroy(messages);
     sentMessage = responce;
